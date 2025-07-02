@@ -51,7 +51,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     cidade: "",
     uf: "",
     cnpj: "",
-    cep:"",
+    cep: "",
     //telefone: "",
     nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
@@ -151,10 +151,12 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         setFormData((prev) => ({
           ...prev,
           nomeAmbiente: ambiente.nome,
-          cnpj: ambiente.cnpj || "", //atualiza o cnpj ao selecionar o ambiente
+          cnpj: ambiente.cnpj || "",
+          cep: ambiente.cep || "",
         }));
         console.log("Ambiente encontrado:", ambiente);
       }
+
     }
   }, [formData.ambienteSelecionado, ambientes]);
 
@@ -379,8 +381,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="bairro" value={formData.bairro} onChange={handleChange} className="border p-2 rounded" placeholder="Bairro" />
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
-              <input name="cnpj" value={formData.cnpj} onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ"/>
-              <input name="cep" value={formData.cep} onChange={handleChange} className="border p-2 rounded" placeholder="CEP"/>
+              <input name="cnpj" value={formData.cnpj} onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ" />
+              <input name="cep" value={formData.cep} onChange={handleChange} className="border p-2 rounded" placeholder="CEP" />
               {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />

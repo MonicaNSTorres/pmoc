@@ -9,6 +9,7 @@ export async function GET() {
       id: true,
       nome: true,
       cnpj: true,
+      cep: true,
     },
   });
 
