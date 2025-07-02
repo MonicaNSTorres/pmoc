@@ -223,7 +223,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
     doc.setFont("helvetica", "normal");
     y += 7;
-    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario.toUpperCase || ""}`, 10, y);
+    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario || ""}`, 10, y);
     y += 6;
     doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
     y += 6;
