@@ -70,7 +70,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
   const [checklist, setChecklist] = useState<ChecklistItem[]>([]);
   const [servicos, setServicos] = useState<{ id: number; nome: string }[]>([]);
   const [tags, setTags] = useState<{ id: number; tag: string; unidade: string; local: string }[]>([]);
-  const [ambientes, setAmbientes] = useState<{ id: number; nome: string; cnpj?: string }[]>([]);
+  const [ambientes, setAmbientes] = useState<{ id: number; nome: string; cnpj?: string; cep?: string }[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
