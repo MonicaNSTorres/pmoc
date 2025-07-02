@@ -8,6 +8,7 @@ export async function GET() {
     select: {
       id: true,
       nome: true,
+      cnpj: true,
     },
   });
 

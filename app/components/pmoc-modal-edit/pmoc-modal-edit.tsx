@@ -122,7 +122,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         bairro: initialData.bairro || "",
         cidade: initialData.cidade || "",
         uf: initialData.uf || "",
-        cnpj: initialData.cnpj || "",
+        cnpj: ambientes.find((a) => String(a.id) === String(initialData.ambienteId))?.cnpj || "",
         //telefone: initialData.telefone || "",
         nomeProprietario: initialData.nomeProprietario || "",
         //cgcProprietario: initialData.cgcProprietario || "",
@@ -150,6 +150,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
           nomeAmbiente: ambiente.nome,
           cnpj: ambiente.cnpj || "", //atualiza o cnpj ao selecionar o ambiente
         }));
+        console.log("Ambiente encontrado:", ambiente);
       }
     }
   }, [formData.ambienteSelecionado, ambientes]);
