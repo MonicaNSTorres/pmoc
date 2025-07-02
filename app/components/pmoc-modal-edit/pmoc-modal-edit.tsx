@@ -6,6 +6,27 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { X } from "lucide-react";
 
+interface PMOCFormData {
+  nomeAmbiente: string;
+  endereco: string;
+  numero: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  nomeProprietario: string;
+  cgcProprietario?: string; // opcional
+  enderecoProprietario: string;
+  nomeResponsavel: string;
+  cgcResponsavel: string;
+  conselho: string;
+  art: string;
+  tagSelecionada: string;
+  ambienteSelecionado: string;
+  servicoSelecionado: string;
+  contrato: string;
+  cnpj: string;
+}
+
 interface ChecklistItem {
   descricao: string;
   periodicidade: string;
@@ -21,13 +42,14 @@ interface Props {
 }
 
 export default function PMOCFormEditable({ initialData, onCancel, onSave }: Props) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PMOCFormData>({
     nomeAmbiente: "",
     endereco: "",
     numero: "",
     bairro: "",
     cidade: "",
     uf: "",
+    cnpj: "",
     //telefone: "",
     nomeProprietario: "",
     //cgcProprietario: "",
@@ -40,7 +62,6 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     ambienteSelecionado: "",
     servicoSelecionado: "",
     contrato: "AMG 300525",
-    cnpj: "",
   });
 
 
@@ -101,6 +122,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         bairro: initialData.bairro || "",
         cidade: initialData.cidade || "",
         uf: initialData.uf || "",
+        cnpj: initialData.cnpj || "",
         //telefone: initialData.telefone || "",
         nomeProprietario: initialData.nomeProprietario || "",
         //cgcProprietario: initialData.cgcProprietario || "",
@@ -113,7 +135,6 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         tagSelecionada: tagExiste ? String(initialData.tagId) : "",
         servicoSelecionado: "",
         contrato: "AMG 300525",
-        cnpj: "",
       });
     }
   }, [initialData, tags, ambientes]);
@@ -206,6 +227,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
     y += 6;
     doc.text(`Endereço completo: ${formData.endereco || ""}, Nº: ${formData.numero || ""}`, 10, y);
+    y += 6;
+    doc.text(`CNPJ: ${ambienteSelecionado?.cnpj || ""}`, 10, y);
     y += 6;
     doc.text(`Complemento / Bairro / Cidade / UF: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
     //y += 6;
@@ -350,7 +373,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="bairro" value={formData.bairro} onChange={handleChange} className="border p-2 rounded" placeholder="Bairro" />
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
-              <input name="cnpj" value={formData.cnpj} readOnly onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ"/>
+              <input name="cnpj" value={formData.cnpj} onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ"/>
               {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
