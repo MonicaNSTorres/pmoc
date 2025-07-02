@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
-      nomeAmbiente, endereco, numero, bairro, cidade, uf, telefone,
+      nomeAmbiente, endereco, numero, bairro, cidade, uf, //telefone,
       nomeProprietario, cgcProprietario, enderecoProprietario,
       nomeResponsavel, cgcResponsavel, conselho, art, contrato,
       ambienteSelecionado, servicoSelecionado, tagSelecionada,
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         bairro,
         cidade,
         uf,
-        telefone,
+        //telefone,
         nomeProprietario,
         cgcProprietario,
         enderecoProprietario,

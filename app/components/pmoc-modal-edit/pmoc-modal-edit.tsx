@@ -28,7 +28,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     bairro: "",
     cidade: "",
     uf: "",
-    telefone: "",
+    //telefone: "",
     nomeProprietario: "",
     cgcProprietario: "",
     enderecoProprietario: "",
@@ -101,7 +101,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         bairro: initialData.bairro || "",
         cidade: initialData.cidade || "",
         uf: initialData.uf || "",
-        telefone: initialData.telefone || "",
+        //telefone: initialData.telefone || "",
         nomeProprietario: initialData.nomeProprietario || "",
         cgcProprietario: initialData.cgcProprietario || "",
         enderecoProprietario: initialData.enderecoProprietario || "",
@@ -192,8 +192,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.text(`Endereço completo: ${formData.endereco || ""}, Nº: ${formData.numero || ""}`, 10, y);
     y += 6;
     doc.text(`Complemento / Bairro / Cidade / UF: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
-    y += 6;
-    doc.text(`Telefone: ${formData.telefone || ""}`, 10, y);
+    //y += 6;
+    //doc.text(`Telefone: ${formData.telefone || ""}`, 10, y);
     y += 6;
     doc.text(`Contrato: ${formData.contrato || ""}`, 10, y);
 
@@ -334,7 +334,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="bairro" value={formData.bairro} onChange={handleChange} className="border p-2 rounded" placeholder="Bairro" />
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
-              <input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />
+              {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato"/>
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
               <input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />
