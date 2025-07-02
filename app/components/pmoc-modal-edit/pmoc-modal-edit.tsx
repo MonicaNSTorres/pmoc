@@ -30,7 +30,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     uf: "",
     //telefone: "",
     nomeProprietario: "",
-    cgcProprietario: "",
+    //cgcProprietario: "",
     enderecoProprietario: "",
     nomeResponsavel: "",
     cgcResponsavel: "",
@@ -103,7 +103,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         uf: initialData.uf || "",
         //telefone: initialData.telefone || "",
         nomeProprietario: initialData.nomeProprietario || "",
-        cgcProprietario: initialData.cgcProprietario || "",
+        //cgcProprietario: initialData.cgcProprietario || "",
         enderecoProprietario: initialData.enderecoProprietario || "",
         nomeResponsavel: initialData.nomeResponsavel || "",
         cgcResponsavel: initialData.cgcResponsavel || "",
@@ -220,8 +220,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.setFont("helvetica", "normal");
     y += 7;
     doc.text(`Nome/Razão Social: ${formData.nomeProprietario || ""}`, 10, y);
-    y += 6;
-    doc.text(`CIC/CGC: ${formData.cgcProprietario || ""}`, 10, y);
+    //y += 6;
+    //doc.text(`CIC/CGC: ${formData.cgcProprietario || ""}`, 10, y);
     y += 6;
     doc.text(`Endereço completo: ${formData.enderecoProprietario || ""}`, 10, y);
 
@@ -354,7 +354,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
-              <input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />
+              {/*<input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />*/}
               <input name="enderecoProprietario" value={formData.enderecoProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Endereço Proprietário" />
               <input name="nomeResponsavel" value={formData.nomeResponsavel} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Responsável" />
               <input name="cgcResponsavel" value={formData.cgcResponsavel} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Responsável" />
