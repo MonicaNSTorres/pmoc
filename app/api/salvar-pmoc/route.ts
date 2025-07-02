@@ -9,9 +9,10 @@ export async function POST(req: NextRequest) {
     const {
       nomeAmbiente, endereco, numero, bairro, cidade, uf, //telefone,
       nomeProprietario, cgcProprietario, enderecoProprietario,
-      nomeResponsavel, cgcResponsavel, conselho, art, contrato,
+      nomeResponsavel, cgcResponsavel, conselho, art,
       ambienteSelecionado, servicoSelecionado, tagSelecionada,
       checklist = [],
+      contrato,
     } = body;
 
     console.log("body recebido:", body);
@@ -61,7 +62,6 @@ export async function POST(req: NextRequest) {
         cgcResponsavel,
         conselho,
         art,
-        contrato,
         ambienteId: ambiente?.id || null, // <- usa o ID existente
         servicoId: servico?.id,
         tagId: tagSelecionada ? Number(tagSelecionada) : null,
@@ -75,6 +75,7 @@ export async function POST(req: NextRequest) {
             servicoId: servico?.id || undefined,
           })),
         },
+        contrato,
       },
     });
 

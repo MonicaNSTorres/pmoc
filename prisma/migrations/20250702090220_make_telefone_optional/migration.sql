@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "PMOC" ALTER COLUMN "telefone" DROP NOT NULL;

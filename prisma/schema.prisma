@@ -60,7 +60,7 @@ model PMOC {
   bairro               String
   cidade               String
   uf                   String
-  telefone             String
+  telefone             String?
   nomeProprietario     String
   cgcProprietario      String
   enderecoProprietario String
