@@ -24,6 +24,7 @@ export default function PMOCForm() {
       cidade: string;
       uf: string;
       //telefone: string;
+      cnpj: string;
     }[]
   >([]);
 
@@ -53,6 +54,7 @@ export default function PMOCForm() {
     cidade: "",
     uf: "",
     contrato: "AMG 300525",
+    cnpj: "",
     //telefone: "",
     nomeProprietario: "",
     cgcProprietario: "",
@@ -66,7 +68,7 @@ export default function PMOCForm() {
     tagSelecionada: "",
   });
 
-  // Carrega dados iniciais uma vez
+  //carrega dados iniciais uma vez
   useEffect(() => {
     async function carregarDados() {
       try {
@@ -87,12 +89,12 @@ export default function PMOCForm() {
     carregarDados();
   }, []);
 
-  // Preenche os campos ao selecionar um ambiente
+  //preenche os campos ao selecionar um ambiente
   useEffect(() => {
     if (!formData.ambienteSelecionado || ambientes.length === 0) return;
 
     const ambiente = ambientes.find(
-      (a) => String(a.id) === formData.ambienteSelecionado // importante usar String aqui
+      (a) => String(a.id) === formData.ambienteSelecionado
     );
 
     if (ambiente) {
@@ -104,10 +106,11 @@ export default function PMOCForm() {
         bairro: ambiente.bairro || "",
         cidade: ambiente.cidade || "",
         uf: ambiente.uf || "",
-        //telefone: ambiente.telefone || "",
+        cnpj: ambiente.cnpj || "",
       }));
     }
   }, [formData.ambienteSelecionado, ambientes]);
+
 
 
   function handleChange(
@@ -210,6 +213,14 @@ export default function PMOCForm() {
                 className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2"
               />
 
+              <input
+                name="cnpj"
+                placeholder="CNPJ"
+                value={formData.cnpj}
+                onChange={handleChange}
+                readOnly//para nao editarem manualmente
+                className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2"
+              />
 
               {["endereco", "numero", "bairro", "cidade", "uf"].map((field) => (
                 <input

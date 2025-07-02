@@ -15,7 +15,8 @@ export async function GET() {
         bairro: true,
         cidade: true,
         uf: true,
-        telefone: true,
+        //telefone: true,
+        cnpj: true,
       },
     });
 

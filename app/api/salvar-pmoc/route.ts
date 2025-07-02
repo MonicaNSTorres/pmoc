@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
         cgcResponsavel,
         conselho,
         art,
+        contrato,
         ambienteId: ambiente?.id || null, // <- usa o ID existente
         servicoId: servico?.id,
         tagId: tagSelecionada ? Number(tagSelecionada) : null,
@@ -75,7 +76,6 @@ export async function POST(req: NextRequest) {
             servicoId: servico?.id || undefined,
           })),
         },
-        contrato,
       },
     });
 
