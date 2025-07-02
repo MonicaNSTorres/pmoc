@@ -17,6 +17,7 @@ export async function GET() {
         uf: true,
         //telefone: true,
         cnpj: true,
+        cep: true,
       },
     });
 

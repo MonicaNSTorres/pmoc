@@ -25,6 +25,7 @@ export default function PMOCForm() {
       uf: string;
       //telefone: string;
       cnpj: string;
+      cep: string;
     }[]
   >([]);
 
@@ -55,6 +56,7 @@ export default function PMOCForm() {
     uf: "",
     contrato: "AMG 300525",
     cnpj: "",
+    cep: "",
     //telefone: "",
     nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
@@ -107,6 +109,7 @@ export default function PMOCForm() {
         cidade: ambiente.cidade || "",
         uf: ambiente.uf || "",
         cnpj: ambiente.cnpj || "",
+        cep: ambiente.cep || "",
       }));
     }
   }, [formData.ambienteSelecionado, ambientes]);
@@ -221,6 +224,16 @@ export default function PMOCForm() {
                 readOnly//para nao editarem manualmente
                 className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2"
               />
+
+              <input
+                name="cep"
+                placeholder="CEP"
+                value={formData.cep}
+                onChange={handleChange}
+                readOnly
+                className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2"
+              />
+
 
               {["endereco", "numero", "bairro", "cidade", "uf"].map((field) => (
                 <input

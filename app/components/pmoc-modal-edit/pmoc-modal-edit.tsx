@@ -25,6 +25,7 @@ interface PMOCFormData {
   servicoSelecionado: string;
   contrato: string;
   cnpj: string;
+  cep: string;
 }
 
 interface ChecklistItem {
@@ -50,6 +51,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     cidade: "",
     uf: "",
     cnpj: "",
+    cep:"",
     //telefone: "",
     nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
@@ -123,6 +125,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         cidade: initialData.cidade || "",
         uf: initialData.uf || "",
         cnpj: ambientes.find((a) => String(a.id) === String(initialData.ambienteId))?.cnpj || "",
+        cep: ambientes.find((a) => String(a.id) === String(initialData.ambienteId))?.cep || "",
         //telefone: initialData.telefone || "",
         nomeProprietario: initialData.nomeProprietario || "Sicoob Cressem",
         //cgcProprietario: initialData.cgcProprietario || "",
@@ -228,6 +231,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
     y += 6;
     doc.text(`Endereço completo: ${formData.endereco || ""}, Nº: ${formData.numero || ""}`, 10, y);
+    y += 6;
+    doc.text(`CEP: ${ambienteSelecionado?.cep || ""}`, 10, y);
     y += 6;
     doc.text(`CNPJ: ${ambienteSelecionado?.cnpj || ""}`, 10, y);
     y += 6;
@@ -375,6 +380,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
               <input name="cnpj" value={formData.cnpj} onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ"/>
+              <input name="cep" value={formData.cep} onChange={handleChange} className="border p-2 rounded" placeholder="CEP"/>
               {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />

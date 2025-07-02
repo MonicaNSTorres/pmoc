@@ -17,6 +17,7 @@ model Ambiente {
   uf        String?
   telefone  String?
   cnpj      String?
+  cep       String?
 
   tags   Tag[]   @relation("AmbienteTags")
   pmocs  PMOC[]  @relation("AmbientePMOC")
