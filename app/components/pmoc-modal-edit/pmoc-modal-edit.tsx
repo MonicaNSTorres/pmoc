@@ -311,7 +311,11 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     //doc.text("Técnico Responsável", 30, finalY + 6);
     doc.text("Engenheiro Responsável", 130, finalY + 6);
 
-    doc.save("PMOC-preenchido.pdf");
+    const nomeArquivo = tagSelecionada
+      ? `${tagSelecionada.unidade}-${tagSelecionada.tag}-${dataGeracao}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_")
+      : `PMOC-${dataGeracao}`;
+
+    doc.save(`${nomeArquivo}.pdf`);
   }
 
 
