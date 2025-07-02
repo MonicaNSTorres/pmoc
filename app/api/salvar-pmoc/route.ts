@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {
       nomeAmbiente, endereco, numero, bairro, cidade, uf, //telefone,
-      nomeProprietario, cgcProprietario, enderecoProprietario,
+      nomeProprietario, cgcProprietario, //enderecoProprietario,
       nomeResponsavel, cgcResponsavel, conselho, art,
       ambienteSelecionado, servicoSelecionado, tagSelecionada,
       checklist = [],

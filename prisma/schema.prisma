@@ -63,7 +63,7 @@ model PMOC {
   telefone             String?
   nomeProprietario     String
   cgcProprietario      String?
-  enderecoProprietario String
+  enderecoProprietario String?
   nomeResponsavel      String
   cgcResponsavel       String
   conselho             String

@@ -15,7 +15,7 @@ interface PMOCFormData {
   uf: string;
   nomeProprietario: string;
   cgcProprietario?: string; // opcional
-  enderecoProprietario: string;
+  //enderecoProprietario: string;
   nomeResponsavel: string;
   cgcResponsavel: string;
   conselho: string;
@@ -51,9 +51,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     uf: "",
     cnpj: "",
     //telefone: "",
-    nomeProprietario: "",
+    nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
-    enderecoProprietario: "",
+    //enderecoProprietario: "",
     nomeResponsavel: "",
     cgcResponsavel: "",
     conselho: "",
@@ -124,9 +124,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         uf: initialData.uf || "",
         cnpj: ambientes.find((a) => String(a.id) === String(initialData.ambienteId))?.cnpj || "",
         //telefone: initialData.telefone || "",
-        nomeProprietario: initialData.nomeProprietario || "",
+        nomeProprietario: initialData.nomeProprietario || "Sicoob Cressem",
         //cgcProprietario: initialData.cgcProprietario || "",
-        enderecoProprietario: initialData.enderecoProprietario || "",
+        //enderecoProprietario: initialData.enderecoProprietario || "",
         nomeResponsavel: initialData.nomeResponsavel || "",
         cgcResponsavel: initialData.cgcResponsavel || "",
         conselho: initialData.conselho || "",
@@ -223,7 +223,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
     doc.setFont("helvetica", "normal");
     y += 7;
-    doc.text(`Nome (Edifício/Entidade): ${ambienteSelecionado?.nome || ""}`, 10, y);
+    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario || ""}`, 10, y);
     y += 6;
     doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
     y += 6;
@@ -238,7 +238,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.text(`Contrato: ${formData.contrato || ""}`, 10, y);
 
 
-    y += 10;
+    {/*y += 10;
     doc.setFont("helvetica", "bold");
     doc.text("2 - Identificação do Proprietário, Locatário ou Preposto:", 10, y);
     doc.setFont("helvetica", "normal");
@@ -247,7 +247,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     //y += 6;
     //doc.text(`CIC/CGC: ${formData.cgcProprietario || ""}`, 10, y);
     y += 6;
-    doc.text(`Endereço completo: ${formData.enderecoProprietario || ""}`, 10, y);
+    doc.text(`Endereço completo: ${formData.enderecoProprietario || ""}`, 10, y);*/}
 
     y += 10;
     doc.setFont("helvetica", "bold");
@@ -379,7 +379,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
               {/*<input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />*/}
-              <input name="enderecoProprietario" value={formData.enderecoProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Endereço Proprietário" />
+              {/*<input name="enderecoProprietario" value={formData.enderecoProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Endereço Proprietário" />*/}
               <input name="nomeResponsavel" value={formData.nomeResponsavel} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Responsável" />
               <input name="cgcResponsavel" value={formData.cgcResponsavel} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Responsável" />
               <input name="conselho" value={formData.conselho} onChange={handleChange} className="border p-2 rounded" placeholder="Conselho" />

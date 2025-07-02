@@ -56,9 +56,9 @@ export default function PMOCForm() {
     contrato: "AMG 300525",
     cnpj: "",
     //telefone: "",
-    nomeProprietario: "",
+    nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
-    enderecoProprietario: "",
+    //enderecoProprietario: "",
     nomeResponsavel: "LUIZ CARLOS PELLEGRINI JUNIOR",
     cgcResponsavel: "0682189924",
     conselho: "Engenheiro Industrial - Mecânica - RNP 2602139106",
@@ -236,14 +236,14 @@ export default function PMOCForm() {
             </div>
           </section>
 
-          <section>
+          {/*<section>
             <h3 className="text-2xl font-semibold mb-6 text-blue-800 border-b pb-2">2 - Identificação do Proprietário</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input name="nomeProprietario" placeholder="Nome/Razão Social" value={formData.nomeProprietario} onChange={handleChange} className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2" />
-              {/*<input name="cgcProprietario" placeholder="CIC/CGC" value={formData.cgcProprietario} onChange={handleChange} className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2" />*/}
+              <input name="cgcProprietario" placeholder="CIC/CGC" value={formData.cgcProprietario} onChange={handleChange} className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2" />
               <input name="enderecoProprietario" placeholder="Endereço completo" value={formData.enderecoProprietario} onChange={handleChange} className="md:col-span-2 w-full max-w-xs md:max-w-full text-sm px-2 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none md:text-base md:px-4 md:py-2" />
             </div>
-          </section>
+          </section>*/}
 
           <section>
             <h3 className="text-2xl font-semibold mb-6 text-blue-800 border-b pb-2">3 - Responsável Técnico</h3>
