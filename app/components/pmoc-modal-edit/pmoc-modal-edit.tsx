@@ -223,7 +223,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
     doc.setFont("helvetica", "normal");
     y += 7;
-    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario || ""}`, 10, y);
+    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario.toUpperCase || ""}`, 10, y);
     y += 6;
     doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
     y += 6;
@@ -231,7 +231,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     y += 6;
     doc.text(`CNPJ: ${ambienteSelecionado?.cnpj || ""}`, 10, y);
     y += 6;
-    doc.text(`Complemento / Bairro / Cidade / UF: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
+    doc.text(`Complemento: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
     //y += 6;
     //doc.text(`Telefone: ${formData.telefone || ""}`, 10, y);
     y += 6;
@@ -256,7 +256,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     y += 7;
     doc.text(`Nome/Razão Social: ${formData.nomeResponsavel || ""}`, 10, y);
     y += 6;
-    doc.text(`CIC/CGC: ${formData.cgcResponsavel || ""}`, 10, y);
+    doc.text(`CREASP: ${formData.cgcResponsavel || ""}`, 10, y);
     y += 6;
     doc.text(`Registro no Conselho: ${formData.conselho || ""}`, 10, y);
     y += 6;
