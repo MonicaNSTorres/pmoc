@@ -40,14 +40,14 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     ambienteSelecionado: "",
     servicoSelecionado: "",
     contrato: "AMG 300525",
+    cnpj: "",
   });
-
 
 
   const [checklist, setChecklist] = useState<ChecklistItem[]>([]);
   const [servicos, setServicos] = useState<{ id: number; nome: string }[]>([]);
   const [tags, setTags] = useState<{ id: number; tag: string; unidade: string; local: string }[]>([]);
-  const [ambientes, setAmbientes] = useState<{ id: number; nome: string }[]>([]);
+  const [ambientes, setAmbientes] = useState<{ id: number; nome: string; cnpj?: string }[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -113,9 +113,25 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         tagSelecionada: tagExiste ? String(initialData.tagId) : "",
         servicoSelecionado: "",
         contrato: "AMG 300525",
+        cnpj: "",
       });
     }
   }, [initialData, tags, ambientes]);
+
+  useEffect(() => {
+    if (formData.ambienteSelecionado) {
+      const ambiente = ambientes.find(
+        (amb) => String(amb.id) === String(formData.ambienteSelecionado)
+      );
+      if (ambiente) {
+        setFormData((prev) => ({
+          ...prev,
+          nomeAmbiente: ambiente.nome,
+          cnpj: ambiente.cnpj || "", //atualiza o cnpj ao selecionar o ambiente
+        }));
+      }
+    }
+  }, [formData.ambienteSelecionado, ambientes]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -334,8 +350,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="bairro" value={formData.bairro} onChange={handleChange} className="border p-2 rounded" placeholder="Bairro" />
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
+              <input name="cnpj" value={formData.cnpj} readOnly onChange={handleChange} className="border p-2 rounded" placeholder="CNPJ"/>
               {/*<input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />*/}
-              <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato"/>
+              <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato" />
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
               <input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />
               <input name="enderecoProprietario" value={formData.enderecoProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Endereço Proprietário" />
