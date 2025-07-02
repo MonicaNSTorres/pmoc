@@ -74,15 +74,13 @@ export default function PMOCForm() {
   useEffect(() => {
     async function carregarDados() {
       try {
-        const [resAmbientes, resTags, resServicos] = await Promise.all([
+        const [resAmbientes, resTags] = await Promise.all([
           axios.get("/api/listar-ambientes"),
-          axios.get("/api/listar-tags"),
           axios.get("/api/listar-servicos"),
         ]);
 
         setAmbientes(resAmbientes.data);
         setTags(resTags.data);
-        setServicos(resServicos.data);
       } catch (err) {
         console.error("Erro ao carregar dados iniciais:", err);
       }
@@ -90,6 +88,23 @@ export default function PMOCForm() {
 
     carregarDados();
   }, []);
+
+  //atualiza as tags conforme ambiente selecionado
+  useEffect(() => {
+    if (!formData.ambienteSelecionado) return;
+
+    async function carregarTagsDoAmbiente() {
+      try {
+        const res = await axios.get(`/api/listar-tags?ambienteId=${formData.ambienteSelecionado}`);
+        setTags(res.data);
+      } catch (error) {
+        console.error("Erro ao carregar TAGs do ambiente:", error);
+      }
+    }
+
+    carregarTagsDoAmbiente();
+  }, [formData.ambienteSelecionado]);
+
 
   //preenche os campos ao selecionar um ambiente
   useEffect(() => {
