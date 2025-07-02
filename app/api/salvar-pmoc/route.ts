@@ -9,14 +9,14 @@ export async function POST(req: NextRequest) {
     const {
       nomeAmbiente, endereco, numero, bairro, cidade, uf, telefone,
       nomeProprietario, cgcProprietario, enderecoProprietario,
-      nomeResponsavel, cgcResponsavel, conselho, art,
+      nomeResponsavel, cgcResponsavel, conselho, art, contrato,
       ambienteSelecionado, servicoSelecionado, tagSelecionada,
       checklist = [],
     } = body;
 
     console.log("body recebido:", body);
 
-    // ✅ Correção aqui: trata ambienteSelecionado como ID
+    //trata ambienteSelecionado como ID
     let ambiente = null;
     if (ambienteSelecionado && !isNaN(Number(ambienteSelecionado))) {
       ambiente = await prisma.ambiente.findUnique({
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Serviço continua sendo criado automaticamente
+    //serviço continua sendo criado automaticamente
     const servico = servicoSelecionado
       ? await prisma.servico.upsert({
           where: { nome: servicoSelecionado },
@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
         cgcResponsavel,
         conselho,
         art,
+        contrato,
         ambienteId: ambiente?.id || null, // <- usa o ID existente
         servicoId: servico?.id,
         tagId: tagSelecionada ? Number(tagSelecionada) : null,

@@ -68,6 +68,7 @@ model PMOC {
   cgcResponsavel       String
   conselho             String
   art                  String
+  contrato             String?
 
   ambienteId Int?
   servicoId  Int?

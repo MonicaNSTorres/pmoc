@@ -39,6 +39,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     tagSelecionada: "",
     ambienteSelecionado: "",
     servicoSelecionado: "",
+    contrato: "AMG 300525",
   });
 
 
@@ -111,6 +112,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         ambienteSelecionado: ambienteExiste ? String(initialData.ambienteId) : "",
         tagSelecionada: tagExiste ? String(initialData.tagId) : "",
         servicoSelecionado: "",
+        contrato: "AMG 300525",
       });
     }
   }, [initialData, tags, ambientes]);
@@ -192,6 +194,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.text(`Complemento / Bairro / Cidade / UF: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
     y += 6;
     doc.text(`Telefone: ${formData.telefone || ""}`, 10, y);
+    y += 6;
+    doc.text(`Contrato: ${formData.contrato || ""}`, 10, y);
 
 
     y += 10;
@@ -331,6 +335,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
               <input name="cidade" value={formData.cidade} onChange={handleChange} className="border p-2 rounded" placeholder="Cidade" />
               <input name="uf" value={formData.uf} onChange={handleChange} className="border p-2 rounded" placeholder="UF" />
               <input name="telefone" value={formData.telefone} onChange={handleChange} className="border p-2 rounded" placeholder="Telefone" />
+              <input name="contrato" value={formData.contrato} onChange={handleChange} className="border p-2 rounded" placeholder="Contrato"/>
               <input name="nomeProprietario" value={formData.nomeProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Nome Proprietário" />
               <input name="cgcProprietario" value={formData.cgcProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="CGC Proprietário" />
               <input name="enderecoProprietario" value={formData.enderecoProprietario} onChange={handleChange} className="border p-2 rounded" placeholder="Endereço Proprietário" />
