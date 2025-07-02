@@ -299,7 +299,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
     doc.setFont("helvetica", "normal");
-    doc.line(20, finalY, 90, finalY);
+    //doc.line(20, finalY, 90, finalY);
     doc.line(120, finalY, 190, finalY);
     //doc.text("Técnico Responsável", 30, finalY + 6);
     doc.text("Engenheiro Responsável", 130, finalY + 6);
