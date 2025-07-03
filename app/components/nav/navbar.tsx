@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars } from "react-icons/fa";
+import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 
 const SidebarPMOC = () => {
@@ -53,6 +53,16 @@ const SidebarPMOC = () => {
           >
             <FaClipboardCheck className="text-2xl" />
             {isOpen && <span>Listagem PMOC</span>}
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/pmoc-pdf"
+            onClick={closeSidebar}
+            className={`flex items-center space-x-4 p-3 rounded-md transition-colors duration-200 hover:text-white ${isActive("/pmoc-pdf")}`}
+          >
+            <FaFolderOpen className="text-2xl" />
+            {isOpen && <span>PDF's Gerados</span>}
           </Link>
         </li>
         <li>
