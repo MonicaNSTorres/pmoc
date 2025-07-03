@@ -443,7 +443,18 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                     {checklist.map((item, index) => (
                       <tr key={index}>
                         <td className="border p-2">{item.descricao}</td>
-                        <td className="border p-2">{item.periodicidade}</td>
+                        <td className="border p-2">
+                          <select
+                            value={item.periodicidade}
+                            onChange={(e) => handleChecklistChange(index, "periodicidade", e.target.value)}
+                            className="w-full border rounded px-2"
+                          >
+                            <option value="">Selecione</option>
+                            <option value="Mensal">Mensal</option>
+                            <option value="Trimestral">Trimestral</option>
+                          </select>
+                        </td>
+
                         <td className="border p-2">
                           <input type="date" className="w-full border rounded px-2" value={item.data} onChange={(e) => handleChecklistChange(index, "data", e.target.value)} />
                         </td>
