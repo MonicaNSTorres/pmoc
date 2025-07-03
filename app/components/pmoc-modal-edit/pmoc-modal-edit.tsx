@@ -436,7 +436,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                       <th className="border p-2">Periodicidade</th>
                       <th className="border p-2">Data Execução</th>
                       <th className="border p-2">Executado por</th>
-                      <th className="border p-2">Aprovado por</th>
+                      {/*<th className="border p-2">Aprovado por</th>*/}
                     </tr>
                   </thead>
                   <tbody>

@@ -321,7 +321,7 @@ export default function PMOCForm() {
                   <th className="border p-2 w-1/5">Periodicidade</th>
                   <th className="border p-2 w-1/5">Data Execução</th>
                   <th className="border p-2 w-1/5">Executado por</th>
-                  <th className="border p-2 w-1/5">Aprovado por</th>
+                  {/*<th className="border p-2 w-1/5">Aprovado por</th>*/}
                 </tr>
               </thead>
               <tbody>
