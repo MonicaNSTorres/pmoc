@@ -33,7 +33,7 @@ interface ChecklistItem {
   periodicidade: string;
   data: string;
   executadoPor: string;
-  aprovadoPor: string;
+  //aprovadoPor: string;
 }
 
 interface Props {
@@ -89,7 +89,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
           periodicidade: item.periodicidade,
           data: item.dataExecucao ? item.dataExecucao.split("T")[0] : "",
           executadoPor: item.executadoPor,
-          aprovadoPor: item.aprovadoPor,
+          //aprovadoPor: item.aprovadoPor,
         };
       });
 
@@ -180,7 +180,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         periodicidade: item.periodicidade,
         data: item.data,
         executadoPor: item.executadoPor,
-        aprovadoPor: item.aprovadoPor,
+        //aprovadoPor: item.aprovadoPor,
         servicoId: servico?.id ?? null,
         dataExecucao: item.data ? item.data : undefined,
       };
@@ -295,7 +295,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
         item.periodicidade,
         formatarDataBR(item.data),
         item.executadoPor,
-        item.aprovadoPor,
+        //item.aprovadoPor,
       ]),
       styles: {
         fontSize: 7,
@@ -450,9 +450,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                         <td className="border p-2">
                           <input type="text" className="w-full border rounded px-2" value={item.executadoPor} onChange={(e) => handleChecklistChange(index, "executadoPor", e.target.value)} />
                         </td>
-                        <td className="border p-2">
+                        {/*<td className="border p-2">
                           <input type="text" className="w-full border rounded px-2" value={item.aprovadoPor} onChange={(e) => handleChecklistChange(index, "aprovadoPor", e.target.value)} />
-                        </td>
+                        </td>*/}
                       </tr>
                     ))}
                   </tbody>

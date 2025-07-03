@@ -38,7 +38,7 @@ export async function PUT(req: NextRequest) {
         bairro: data.bairro,
         cidade: data.cidade,
         uf: data.uf,
-        telefone: data.telefone,
+        //telefone: data.telefone,
         nomeProprietario: data.nomeProprietario,
         cgcProprietario: data.cgcProprietario,
         enderecoProprietario: data.enderecoProprietario,
@@ -63,7 +63,7 @@ export async function PUT(req: NextRequest) {
           periodicidade: item.periodicidade,
           dataExecucao: item.data ? new Date(`${item.data}T00:00:00`) : null,
           executadoPor: item.executadoPor,
-          aprovadoPor: item.aprovadoPor,
+          //aprovadoPor: item.aprovadoPor,
           pmocId: id,
         })),
       });

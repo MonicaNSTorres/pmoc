@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
         periodicidade: item.periodicidade,
         dataExecucao: item.data ? new Date(`${item.data}T00:00:00`) : undefined,
         executadoPor: item.executadoPor,
-        aprovadoPor: item.aprovadoPor,
+        //aprovadoPor: item.aprovadoPor,
         servicoId: servico?.id || undefined,
       }))
     );
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
             periodicidade: item.periodicidade,
             dataExecucao: item.data ? new Date(item.data) : undefined,
             executadoPor: item.executadoPor,
-            aprovadoPor: item.aprovadoPor,
+            //aprovadoPor: item.aprovadoPor,
             servicoId: servico?.id || undefined,
           })),
         },

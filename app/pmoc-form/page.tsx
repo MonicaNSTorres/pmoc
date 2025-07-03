@@ -10,7 +10,7 @@ type ChecklistItem = {
   periodicidade: string;
   data: string;
   executadoPor: string;
-  aprovadoPor: string;
+  //aprovadoPor: string;
 };
 
 export default function PMOCForm() {
@@ -43,7 +43,7 @@ export default function PMOCForm() {
       periodicidade: "Mensal",
       data: getTodayISO(),
       executadoPor: "",
-      aprovadoPor: "",
+      //aprovadoPor: "",
     }))
   );
 
@@ -358,14 +358,14 @@ export default function PMOCForm() {
                         onChange={(e) => handleChecklistChange(i, "executadoPor", e.target.value)}
                       />
                     </td>
-                    <td className="border p-1">
+                    {/*<td className="border p-1">
                       <input
                         type="text"
                         className="w-full border rounded px-1 py-1 focus:ring-2 focus:ring-blue-400 text-xs"
                         value={item.aprovadoPor}
                         onChange={(e) => handleChecklistChange(i, "aprovadoPor", e.target.value)}
                       />
-                    </td>
+                    </td>*/}
                   </tr>
                 ))}
               </tbody>
