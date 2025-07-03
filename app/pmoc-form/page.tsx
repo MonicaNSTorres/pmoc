@@ -341,7 +341,17 @@ export default function PMOCForm() {
                         ))}
                       </select>
                     </td>
-                    <td className="border p-1 text-center">{item.periodicidade}</td>
+                    <td className="border p-1">
+                      <select
+                        className="w-full border rounded px-1 py-1 focus:ring-2 focus:ring-blue-400 text-xs"
+                        value={item.periodicidade}
+                        onChange={(e) => handleChecklistChange(i, "periodicidade", e.target.value)}
+                      >
+                        <option value="Mensal">Mensal</option>
+                        <option value="Trimestral">Trimestral</option>
+                      </select>
+                    </td>
+
                     <td className="border p-1">
                       <input
                         type="date"
