@@ -198,7 +198,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     return `${dia}/${mes}/${ano}`;
   }
 
-  function handleGeneratePDF() {
+  async function handleGeneratePDF() {
     const doc = new jsPDF();
     const ambienteSelecionado = ambientes.find(a => String(a.id) === String(formData.ambienteSelecionado));
     const tagSelecionada = tags.find(t => String(t.id) === String(formData.tagSelecionada));
@@ -316,6 +316,17 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
       : `PMOC-${dataGeracao}`;
 
     doc.save(`${nomeArquivo}.pdf`);
+
+    const blob = doc.output("blob");
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("pdf", blob, `${nomeArquivo}.pdf`);
+    formDataToSend.append("nomeArquivo", nomeArquivo);
+    formDataToSend.append("tagId", formData.tagSelecionada);
+    formDataToSend.append("ambienteId", formData.ambienteSelecionado);
+
+    await axios.post("/api/salvar-pdf", formDataToSend);
+
   }
 
 

@@ -1,3 +1,4 @@
+// app/api/listar-pdfs/route.ts
 import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
@@ -11,14 +12,12 @@ export async function GET() {
 
     for (const unidade of unidades) {
       const unidadePath = path.join(dirPath, unidade);
-
       const statUnidade = await fs.stat(unidadePath);
       if (!statUnidade.isDirectory()) continue;
 
       const tags = await fs.readdir(unidadePath);
       for (const tag of tags) {
         const tagPath = path.join(unidadePath, tag);
-
         const statTag = await fs.stat(tagPath);
         if (!statTag.isDirectory()) continue;
 
@@ -44,10 +43,8 @@ export async function GET() {
 
 function extrairDataDoNome(nome: string): string {
   try {
-    // Ex: "UnidadeA-TAG1-24/06/2025.pdf" → ["UnidadeA", "TAG1", "24/06/2025"]
     const partes = nome.replace(".pdf", "").split("-");
-    const data = partes[2] ?? "";
-    return data;
+    return partes[2] || "";
   } catch {
     return "";
   }

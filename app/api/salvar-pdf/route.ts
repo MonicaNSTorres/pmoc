@@ -1,37 +1,29 @@
-import { NextRequest, NextResponse } from "next/server";
-import { mkdir, writeFile } from "fs/promises";
+import { writeFile } from "fs/promises";
 import path from "path";
+import { NextResponse } from "next/server";
+import { v4 as uuid } from "uuid";
 
-export async function POST(req: NextRequest) {
-  try {
-    const formData = await req.formData();
+export async function POST(req: Request) {
+  const data = await req.formData();
+  const file = data.get("pdf") as File;
+  const nomeArquivo = data.get("nomeArquivo") as string;
 
-    const pdf = formData.get("pdf") as File;
-    const unidade = formData.get("unidade") as string;
-    const tag = formData.get("tag") as string;
-
-    if (!pdf || !unidade || !tag) {
-      return NextResponse.json({ error: "Dados incompletos." }, { status: 400 });
-    }
-
-    const bytes = await pdf.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const nomeArquivo = pdf.name;
-
-    const pastaDestino = path.join(process.cwd(), "public", "pdfs", unidade, tag);
-
-    //cria a pasta se ela nao existir
-    await mkdir(pastaDestino, { recursive: true });
-
-    //caminho completo para salvar o PDF
-    const caminhoArquivo = path.join(pastaDestino, nomeArquivo);
-
-    //salva o PDF no disco
-    await writeFile(caminhoArquivo, buffer);
-
-    return NextResponse.json({ sucesso: true, caminho: `/pdfs/${unidade}/${tag}/${nomeArquivo}` });
-  } catch (error: any) {
-    console.error("Erro ao salvar PDF:", error);
-    return NextResponse.json({ error: "Erro interno ao salvar o PDF." }, { status: 500 });
+  if (!file || !nomeArquivo) {
+    return NextResponse.json({ error: "Faltam dados" }, { status: 400 });
   }
+
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+
+  const agora = new Date();
+  const ano = agora.getFullYear().toString();
+  const mes = String(agora.getMonth() + 1).padStart(2, "0");
+
+  const folderPath = path.join(process.cwd(), "public", "pdfs", ano, mes);
+  const filePath = path.join(folderPath, `${uuid()}.pdf`);
+
+  await fs.mkdir(folderPath, { recursive: true });
+  await writeFile(filePath, buffer);
+
+  return NextResponse.json({ success: true, path: filePath });
 }
