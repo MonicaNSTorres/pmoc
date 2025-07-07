@@ -1,8 +1,6 @@
 import path from "path";
 import { NextResponse } from "next/server";
-import { v4 as uuid } from "uuid";
 import { writeFile, mkdir } from "fs/promises";
-
 
 export async function POST(req: Request) {
   const data = await req.formData();
@@ -21,7 +19,12 @@ export async function POST(req: Request) {
   const mes = String(agora.getMonth() + 1).padStart(2, "0");
 
   const folderPath = path.join(process.cwd(), "public", "pdfs", ano, mes);
-  const filePath = path.join(folderPath, `${uuid()}.pdf`);
+
+  const nomeArquivoLimpo = nomeArquivo
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]/g, "");
+
+  const filePath = path.join(folderPath, `${nomeArquivoLimpo}.pdf`);
 
   await mkdir(folderPath, { recursive: true });
   await writeFile(filePath, buffer);
