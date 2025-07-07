@@ -1,7 +1,8 @@
-import { writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
+import { writeFile, mkdir } from "fs/promises";
+
 
 export async function POST(req: Request) {
   const data = await req.formData();
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
   const folderPath = path.join(process.cwd(), "public", "pdfs", ano, mes);
   const filePath = path.join(folderPath, `${uuid()}.pdf`);
 
-  await fs.mkdir(folderPath, { recursive: true });
+  await mkdir(folderPath, { recursive: true });
   await writeFile(filePath, buffer);
 
   return NextResponse.json({ success: true, path: filePath });
