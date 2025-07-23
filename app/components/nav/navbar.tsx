@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen } from "react-icons/fa";
+import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen, FaPlusCircle } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 import ModalNovoUsuario from "../pmoc-modal-new-user/pmoc-modal-new-user";
 
@@ -126,12 +126,19 @@ const SidebarPMOC = () => {
         {isAdmin && (
           <li>
             <button
-              onClick={() => setMostrarModal(true)}
+              onClick={() => {
+                closeSidebar();
+                setMostrarModal(true);
+              }}
               className="flex items-center justify-center w-full bg-green-700 text-white px-3 py-2 rounded hover:bg-green-600"
             >
-              Cadastrar usuário
+              <FaPlusCircle className="text-2xl" />
+              {isOpen && <span>Cadastrar usuário</span>}
             </button>
-            {mostrarModal && <ModalNovoUsuario onClose={() => setMostrarModal(false)} />}
+
+            {mostrarModal && (
+              <ModalNovoUsuario onClose={() => setMostrarModal(false)} />
+            )}
           </li>
         )}
 
