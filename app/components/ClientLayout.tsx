@@ -9,8 +9,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const auth = localStorage.getItem("pmoc_auth");
-    setIsAuthenticated(auth === "true");
+    const authData = localStorage.getItem("pmoc_auth");
+
+    if (authData) {
+      try {
+        const parsed = JSON.parse(authData);
+        setIsAuthenticated(!!parsed?.email); // ou qualquer campo confiável
+      } catch {
+        setIsAuthenticated(false);
+      }
+    } else {
+      setIsAuthenticated(false);
+    }
+
     setLoading(false);
   }, []);
 
