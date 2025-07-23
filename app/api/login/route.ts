@@ -7,7 +7,11 @@ export async function POST(req: NextRequest) {
 
   const usuario = await prisma.usuario.findUnique({ where: { email } });
 
-  if (!usuario || !(await bcrypt.compare(senha, usuario.senha))) {
+  /*if (!usuario || !(await bcrypt.compare(senha, usuario.senha))) {
+    return NextResponse.json({ error: "Credenciais inválidas" }, { status: 401 });
+  }*/
+
+  if (!usuario || senha !== usuario.senha) {
     return NextResponse.json({ error: "Credenciais inválidas" }, { status: 401 });
   }
 
