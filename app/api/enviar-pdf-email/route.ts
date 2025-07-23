@@ -1,62 +1,48 @@
-// pages/api/pmoc/enviar-pdf-email.ts
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import axios from "axios";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb', // se o JSON vier grande
-    },
-  },
-};
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST")
-    return res.status(405).json({ error: "Método não permitido" });
-
+export async function POST(req: NextRequest) {
   try {
-    const { pdf } = req.body;
+    const formData = await req.formData();
 
-    if (!pdf || !pdf.url || !pdf.nome) {
-      return res.status(400).json({ error: "Dados incompletos do PDF" });
+    const file = formData.get("pdf") as File | null;
+    const nome = formData.get("nome")?.toString();
+    const tag = formData.get("tag")?.toString();
+    const unidade = formData.get("unidade")?.toString();
+    const data = formData.get("data")?.toString();
+
+    if (!file || !nome || !tag || !unidade || !data) {
+      return NextResponse.json({ error: "Dados incompletos" }, { status: 400 });
     }
 
-    // Baixa o PDF como buffer
-    const response = await axios.get(pdf.url, {
-      responseType: "arraybuffer",
-    });
+    const buffer = Buffer.from(await file.arrayBuffer());
 
-    const pdfBuffer = response.data;
-
-    // Configura o transportador (configure com seu provedor real)
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,       // ex: "smtp.gmail.com"
-      port: Number(process.env.SMTP_PORT), // ex: 465
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
       secure: true,
       auth: {
-        user: process.env.SMTP_USER,     // seu e-mail
-        pass: process.env.SMTP_PASS,     // sua senha ou app password
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
-    // Envia o e-mail
     await transporter.sendMail({
       from: `"Sistema PMOC" <${process.env.SMTP_USER}>`,
-      to: "destinatario@email.com", // <- você pode trocar por um campo dinâmico
-      subject: `PDF PMOC: ${pdf.nome}`,
-      text: `Segue o PDF gerado para a TAG "${pdf.tag}" da unidade "${pdf.unidade}" em ${pdf.data}.`,
+      to: "destinatario@email.com",
+      subject: `PDF PMOC: ${nome}`,
+      text: `Segue o PDF gerado para a TAG "${tag}" da unidade "${unidade}" em ${data}.`,
       attachments: [
         {
-          filename: `${pdf.nome}.pdf`,
-          content: pdfBuffer,
+          filename: `${nome}.pdf`,
+          content: buffer,
         },
       ],
     });
 
-    return res.status(200).json({ success: true });
-  } catch (error: any) {
-    console.error("Erro ao enviar e-mail:", error);
-    return res.status(500).json({ error: "Erro ao enviar e-mail" });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Erro ao enviar e-mail:", err);
+    return NextResponse.json({ error: "Erro interno ao enviar e-mail" }, { status: 500 });
   }
 }
