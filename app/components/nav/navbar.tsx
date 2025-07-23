@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
+import ModalNovoUsuario from "../pmoc-modal-new-user/pmoc-modal-new-user";
 
 const SidebarPMOC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,22 @@ const SidebarPMOC = () => {
   const isActive = (path: string) => pathname === path ? "bg-blue-600 text-white" : "text-gray-400";
 
   if (!isClient) return null;
+
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("pmoc_auth");
+    if (auth) {
+      try {
+        const parsed = JSON.parse(auth);
+        setIsAdmin(parsed.admin === true);
+      } catch {
+        setIsAdmin(false);
+      }
+    }
+  }, []);
+
 
   return (
     <div className={`${isOpen ? "w-64" : "w-20"} bg-gray-900 text-gray-400 flex flex-col transition-all duration-300 h-screen fixed`}>
@@ -106,6 +123,19 @@ const SidebarPMOC = () => {
             Sair
           </button>
         </li>
+
+        {isAdmin && (
+          <li>
+            <button
+              onClick={() => setMostrarModal(true)}
+              className="flex items-center justify-center w-full bg-green-700 text-white px-3 py-2 rounded hover:bg-green-600"
+            >
+              Cadastrar usuário
+            </button>
+            {mostrarModal && <ModalNovoUsuario onClose={() => setMostrarModal(false)} />}
+          </li>
+        )}
+
       </ul>
     </div>
   );
