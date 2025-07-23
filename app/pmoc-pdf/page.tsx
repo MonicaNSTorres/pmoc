@@ -188,7 +188,16 @@ export default function ListaPDFsPMOC() {
 
   const handleEnviarEmail = async (pmoc: PMOC) => {
     try {
-      await axios.post("/api/pmoc/enviar-pdf-email", { pmocId: pmoc.id });
+      await axios.post("/api/pmoc/enviar-pdf-email", {
+        pdf: {
+          url: "https://url-do-pdf",
+          nome: "nome-do-pdf",
+          tag: pmoc.tag?.tag,
+          unidade: pmoc.tag?.unidade,
+          data: new Date(pmoc.criadoEm).toLocaleDateString("pt-BR"),
+        }
+      });
+
       alert("PDF enviado por e-mail com sucesso!");
     } catch (err) {
       alert("Erro ao enviar e-mail.");
