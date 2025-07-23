@@ -182,7 +182,7 @@ export default function ListaPDFsPMOC() {
     formData.append("unidade", tagSelecionada?.unidade || "");
     formData.append("data", dataGeracao);
 
-    await axios.post("/api/pmoc/enviar-pdf-email", formData);
+    await axios.post("/api/enviar-pdf-email", formData);
 
   };
 
@@ -197,7 +197,7 @@ export default function ListaPDFsPMOC() {
 
   const handleEnviarEmail = async (pmoc: PMOC) => {
     try {
-      await axios.post("/api/pmoc/enviar-pdf-email", {
+      await axios.post("/api/enviar-pdf-email", {
         pdf: {
           url: "https://url-do-pdf",
           nome: "nome-do-pdf",
