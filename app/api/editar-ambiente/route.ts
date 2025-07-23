@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { nome, endereco } = body;
+    const { nome, endereco, bairro, cidade, numero, cep, uf } = body;
 
     if (!nome || nome.trim() === "") {
       return NextResponse.json({ error: "O nome é obrigatório." }, { status: 400 });
@@ -22,6 +22,11 @@ export async function PUT(req: NextRequest) {
       data: {
         nome: nome.trim(),
         endereco: endereco?.trim() || null,
+        bairro: bairro?.trim() || null,
+        cidade: cidade?.trim() || null,
+        numero: numero?.trim() || null,
+        cep: cep?.trim() || null,
+        uf: uf?.trim() || null,
       },
     });
 

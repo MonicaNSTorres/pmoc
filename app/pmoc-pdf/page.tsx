@@ -6,6 +6,7 @@ import { MailPlus, FileDown } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { saveAs } from "file-saver";
+import BackButton from "../components/back-button/back-button";
 
 interface PMOC {
   id: number;
@@ -218,8 +219,9 @@ export default function ListaPDFsPMOC() {
 
   return (
     <div className="flex flex-col pl-[9%] pr-[10%] min-h-screen bg-gray-200 p-4">
-      <div className="max-w-7xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
-        <h1 className="text-2xl font-bold mb-6">PMOCs Gerados</h1>
+      <div className="max-w-8xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
+        <BackButton />
+        <h1 className="text-2xl font-bold mb-6">PMOCs PDF</h1>
 
         {/* Filtros */}
         <div className="flex flex-wrap items-end gap-4 mb-6">
@@ -297,13 +299,13 @@ export default function ListaPDFsPMOC() {
                     <td className="p-2 flex items-center justify-center gap-3">
                       <button
                         onClick={() => handleGerarPdf(pmoc.id)}
-                        className="bg-blue-700 hover:bg-blue-600 text-white px-3 py-1 rounded flex items-center gap-1"
+                        className="bg-blue-800 hover:bg-blue-600 cursor-pointer text-white px-3 py-1 rounded flex items-center gap-1"
                       >
                         <FileDown size={16} /> Gerar PDF
                       </button>
                       <button
                         onClick={() => handleEnviarEmail(pmoc.id)}
-                        className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center gap-1"
+                        className="bg-green-800 hover:bg-green-600 cursor-pointer text-white px-3 py-1 rounded flex items-center gap-1"
                       >
                         <MailPlus size={16} /> Enviar Email
                       </button>

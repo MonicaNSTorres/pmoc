@@ -2,23 +2,45 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ModalNovoUsuario from "./components/pmoc-modal-new-user/pmoc-modal-new-user";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
 
-  function handleLogin(e: React.FormEvent) {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const usuario = JSON.parse(localStorage.getItem("pmoc_auth") || "{}");
+  //const isAdmin = usuario?.email === "admin@email.com"; 
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email === "admin@email.com" && senha === "123456") {
-      localStorage.setItem("pmoc_auth", "true");
-      location.href = "/pmoc-form";
-      //router.push("/pmoc-form");
-    } else {
-      alert("Credenciais inválidas.");
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, senha }),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error);
+        return;
+      }
+
+      localStorage.setItem("pmoc_auth", JSON.stringify(data));
+      setIsAdmin(data.admin);
+
+      router.push("/pmoc-form");
+    } catch (err) {
+      alert("Erro ao fazer login.");
+      console.error(err);
     }
-  }
+  };
+
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-200">
@@ -46,6 +68,23 @@ export default function Home() {
         >
           Entrar
         </button>
+
+        <>
+          {isAdmin && (
+            <button
+              type="button"
+              onClick={() => setMostrarModal(true)}
+              className="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-600 cursor-pointer"
+            >
+              Cadastrar novo usuário
+            </button>
+          )}
+
+          {mostrarModal && (
+            <ModalNovoUsuario onClose={() => setMostrarModal(false)} />
+          )}
+        </>
+
       </form>
     </div>
   );

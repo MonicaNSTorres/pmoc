@@ -106,7 +106,7 @@ export default function ListaPMOC() {
 
   return (
     <div className="flex flex-col pl-[9%] pr-[10%] min-h-screen bg-gray-200 p-4">
-      <div className="max-w-7xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
+      <div className="max-w-8xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
         <BackButton />
         <h1 className="text-2xl font-bold mb-6">PMOCs Cadastrados</h1>
 
@@ -191,7 +191,7 @@ export default function ListaPMOC() {
                   <td className="border p-2">{pmoc.ambiente?.nome || pmoc.nomeAmbiente}</td>
                   <td className="border p-2">{pmoc.cidade}</td>
                   <td className="border p-2">{new Date(pmoc.criadoEm).toLocaleDateString()}</td>
-                  <td className="p-2 pt-3 flex items-center justify-center gap-2">
+                  <td className="p-2 my-2 flex items-center justify-center gap-2">
                     <button
                       onClick={() => abrirEdicao(pmoc)}
                       className="text-blue-800 hover:text-blue-600 cursor-pointer"

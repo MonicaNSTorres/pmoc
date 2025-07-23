@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"Sistema PMOC" <${process.env.SMTP_USER}>`,
-      to: "destinatario@email.com",
+      to: "monica.torres2611@gmail.com",
       subject: `PDF PMOC: ${nome}`,
       text: `Segue o PDF gerado para a TAG "${tag}" da unidade "${unidade}" em ${data}.`,
       attachments: [

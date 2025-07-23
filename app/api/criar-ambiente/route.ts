@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { nome, endereco } = body;
+    const { nome, endereco, bairro, cidade, numero, cep, uf } = body;
 
     if (!nome || nome.trim() === "") {
       return NextResponse.json({ error: "O nome do ambiente é obrigatório." }, { status: 400 });
@@ -13,7 +13,12 @@ export async function POST(req: Request) {
     const novoAmbiente = await prisma.ambiente.create({
       data: {
         nome: nome.trim(),
-        endereco: endereco?.trim() || "",
+        endereco: endereco?.trim() || null,
+        bairro: bairro?.trim() || null,
+        cidade: cidade?.trim() || null,
+        numero: numero?.trim() || null,
+        cep: cep?.trim() || null,
+        uf: uf?.trim() || null,
       },
     });
 

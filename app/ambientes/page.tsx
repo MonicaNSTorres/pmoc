@@ -9,6 +9,11 @@ interface Ambiente {
   id?: number;
   nome: string;
   endereco?: string;
+  bairro?: string;
+  cidade?: string;
+  numero?: string;
+  cep?: string;
+  uf?: string;
 }
 
 export default function ListaAmbientes() {
@@ -63,7 +68,7 @@ export default function ListaAmbientes() {
 
   return (
     <div className="flex flex-col pl-[9%] pr-[10%] min-h-screen bg-gray-200 p-4">
-      <div className="max-w-7xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
+      <div className="max-w-8xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
         <BackButton />
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold mb-6">Ambientes Cadastrados</h1>
@@ -82,7 +87,12 @@ export default function ListaAmbientes() {
           <thead className="bg-blue-100 text-left">
             <tr>
               <th className="border p-2">Nome</th>
-              <th className="border p-2">Endereço</th>
+              <th className="border p-2">Rua</th>
+              <th className="border p-2">Bairro</th>
+              <th className="border p-2">Cidade</th>
+              <th className="border p-2">Número</th>
+              <th className="border p-2">CEP</th>
+              <th className="border p-2">UF</th>
               <th className="border p-2">Ações</th>
             </tr>
           </thead>
@@ -91,7 +101,12 @@ export default function ListaAmbientes() {
               <tr key={ambiente.id} className="border-t">
                 <td className="border p-2">{ambiente.nome}</td>
                 <td className="border p-2">{ambiente.endereco}</td>
-                <td className="border p-2 flex gap-2">
+                <td className="border p-2">{ambiente.bairro}</td>
+                <td className="border p-2">{ambiente.cidade}</td>
+                <td className="border p-2">{ambiente.numero}</td>
+                <td className="border p-2">{ambiente.cep}</td>
+                <td className="border p-2">{ambiente.uf}</td>
+                <td className="p-2 my-2 flex items-center justify-center gap-2">
                   <button onClick={() => abrirEdicao(ambiente)} className="text-blue-800 hover:text-blue-600 cursor-pointer">
                     <Pencil size={22} />
                   </button>
@@ -133,6 +148,46 @@ export default function ListaAmbientes() {
                     handleInputChange("endereco", e.target.value)
                   }
                   placeholder="Endereço do ambiente"
+                />
+                <input
+                  className="border p-2 rounded w-full"
+                  value={formEdit.bairro || ""}
+                  onChange={(e) =>
+                    handleInputChange("bairro", e.target.value)
+                  }
+                  placeholder="Bairro do ambiente"
+                />
+                <input
+                  className="border p-2 rounded w-full"
+                  value={formEdit.cidade || ""}
+                  onChange={(e) =>
+                    handleInputChange("cidade", e.target.value)
+                  }
+                  placeholder="Cidade do ambiente"
+                />
+                <input
+                  className="border p-2 rounded w-full"
+                  value={formEdit.numero || ""}
+                  onChange={(e) =>
+                    handleInputChange("numero", e.target.value)
+                  }
+                  placeholder="Número do ambiente"
+                />
+                <input
+                  className="border p-2 rounded w-full"
+                  value={formEdit.cep || ""}
+                  onChange={(e) =>
+                    handleInputChange("cep", e.target.value)
+                  }
+                  placeholder="CEP do ambiente"
+                />
+                <input
+                  className="border p-2 rounded w-full"
+                  value={formEdit.uf || ""}
+                  onChange={(e) =>
+                    handleInputChange("uf", e.target.value)
+                  }
+                  placeholder="Estado/UF do ambiente"
                 />
                 <div className="flex justify-end gap-2">
                   <button

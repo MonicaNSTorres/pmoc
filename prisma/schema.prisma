@@ -97,3 +97,12 @@ model Checklist {
   pmoc    PMOC     @relation(fields: [pmocId], references: [id])
   servico Servico? @relation(fields: [servicoId], references: [id])
 }
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  admin     Boolean  @default(false)
+  criadoEm  DateTime @default(now())
+}

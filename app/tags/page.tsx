@@ -64,7 +64,7 @@ export default function ListaTags() {
 
   return (
     <div className="flex flex-col pl-[9%] pr-[10%] min-h-screen bg-gray-200 p-4">
-      <div className="max-w-7xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
+      <div className="max-w-8xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
         <BackButton />
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold mb-6">Tags Cadastradas</h1>
@@ -96,7 +96,7 @@ export default function ListaTags() {
                 <td className="border p-2">{tag.nome}</td>
                 <td className="border p-2">{tag.unidade}</td>
                 <td className="border p-2">{tag.local}</td>
-                <td className="border p-2 flex gap-2">
+                <td className="p-2 my-2 flex items-center justify-center gap-2">
                   <button onClick={() => abrirEdicao(tag)} className="text-blue-800 hover:text-blue-600 cursor-pointer">
                     <Pencil size={22} />
                   </button>
