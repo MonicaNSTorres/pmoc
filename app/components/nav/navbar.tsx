@@ -9,22 +9,15 @@ import ModalNovoUsuario from "../pmoc-modal-new-user/pmoc-modal-new-user";
 const SidebarPMOC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  const toggleSidebar = () => setIsOpen(!isOpen);
-  const closeSidebar = () => setIsOpen(false);
-
-  const isActive = (path: string) => pathname === path ? "bg-blue-600 text-white" : "text-gray-400";
-
-  if (!isClient) return null;
-
-  const [mostrarModal, setMostrarModal] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const auth = localStorage.getItem("pmoc_auth");
@@ -38,6 +31,12 @@ const SidebarPMOC = () => {
     }
   }, []);
 
+  if (!isClient) return null;
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
+  const closeSidebar = () => setIsOpen(false);
+
+  const isActive = (path: string) => pathname === path ? "bg-blue-600 text-white" : "text-gray-400";
 
   return (
     <div className={`${isOpen ? "w-64" : "w-20"} bg-gray-900 text-gray-400 flex flex-col transition-all duration-300 h-screen fixed`}>
