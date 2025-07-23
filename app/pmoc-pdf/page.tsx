@@ -5,6 +5,7 @@ import axios from "axios";
 import { MailPlus, FileDown } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { saveAs } from "file-saver";
 
 interface PMOC {
   id: number;
@@ -157,7 +158,7 @@ export default function ListaPDFsPMOC() {
         item.periodicidade,
         formatarDataBR(item.data),
         item.executadoPor,
-        "", // aprovadoPor omitido
+        "",
       ]),
       styles: {
         fontSize: 7,
@@ -175,38 +176,39 @@ export default function ListaPDFsPMOC() {
       : `PMOC-${dataGeracao}`;
 
     const blob = doc.output("blob");
-    const formData = new FormData();
-    formData.append("pdf", blob, `${nomeArquivo}.pdf`);
-    formData.append("nome", nomeArquivo);
-    formData.append("tag", tagSelecionada?.tag || "");
-    formData.append("unidade", tagSelecionada?.unidade || "");
-    formData.append("data", dataGeracao);
 
-    await axios.post("/api/enviar-pdf-email", formData);
-
+    return {
+      blob,
+      nomeArquivo,
+      metadata: {
+        tag: tagSelecionada?.tag || "",
+        unidade: tagSelecionada?.unidade || "",
+        data: dataGeracao,
+      },
+    };
   };
 
   const handleGerarPdf = async (pmocId: number) => {
     try {
-      await gerarPdfPMOC(pmocId);
+      const { blob, nomeArquivo } = await gerarPdfPMOC(pmocId);
+      saveAs(blob, `${nomeArquivo}.pdf`);
     } catch (err) {
       alert("Erro ao gerar PDF.");
       console.error(err);
     }
   };
 
-  const handleEnviarEmail = async (pmoc: PMOC) => {
+  const handleEnviarEmail = async (pmocId: number) => {
     try {
-      await axios.post("/api/enviar-pdf-email", {
-        pdf: {
-          url: "https://url-do-pdf",
-          nome: "nome-do-pdf",
-          tag: pmoc.tag?.tag,
-          unidade: pmoc.tag?.unidade,
-          data: new Date(pmoc.criadoEm).toLocaleDateString("pt-BR"),
-        }
-      });
+      const { blob, nomeArquivo, metadata } = await gerarPdfPMOC(pmocId);
+      const formData = new FormData();
+      formData.append("pdf", blob, `${nomeArquivo}.pdf`);
+      formData.append("nome", nomeArquivo);
+      formData.append("tag", metadata.tag);
+      formData.append("unidade", metadata.unidade);
+      formData.append("data", metadata.data);
 
+      await axios.post("/api/enviar-pdf-email", formData);
       alert("PDF enviado por e-mail com sucesso!");
     } catch (err) {
       alert("Erro ao enviar e-mail.");
@@ -300,12 +302,13 @@ export default function ListaPDFsPMOC() {
                         <FileDown size={16} /> Gerar PDF
                       </button>
                       <button
-                        onClick={() => handleEnviarEmail(pmoc)}
+                        onClick={() => handleEnviarEmail(pmoc.id)}
                         className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center gap-1"
                       >
                         <MailPlus size={16} /> Enviar Email
                       </button>
                     </td>
+
                   </tr>
                 ))}
               </tbody>
