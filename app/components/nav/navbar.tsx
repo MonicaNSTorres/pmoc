@@ -130,10 +130,10 @@ const SidebarPMOC = () => {
                 closeSidebar();
                 setMostrarModal(true);
               }}
-              className="flex items-center justify-center w-full bg-green-700 text-white px-3 py-2 rounded hover:bg-green-600"
+              className="flex items-center justify-center w-full bg-green-700 text-white px-3 py-2 rounded hover:bg-green-600 cursor-pointer"
             >
               <FaPlusCircle className="text-2xl" />
-              {isOpen && <span>Cadastrar usuário</span>}
+              {isOpen && <span> Cadastrar usuário</span>}
             </button>
 
             {mostrarModal && (
