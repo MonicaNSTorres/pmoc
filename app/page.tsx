@@ -9,10 +9,10 @@ export default function Home() {
   const [senha, setSenha] = useState("");
   const router = useRouter();
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  //const [isAdmin, setIsAdmin] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
   const usuario = JSON.parse(localStorage.getItem("pmoc_auth") || "{}");
-  //const isAdmin = usuario?.email === "admin@email.com"; 
+  const isAdmin = usuario?.email === "luizpellegrini@gmail.com"; 
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function Home() {
       }
 
       localStorage.setItem("pmoc_auth", JSON.stringify(data));
-      setIsAdmin(data.admin);
+      (data.admin);
 
       router.push("/pmoc-form");
     } catch (err) {
