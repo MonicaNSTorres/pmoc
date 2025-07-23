@@ -174,7 +174,16 @@ export default function ListaPDFsPMOC() {
       ? `${tagSelecionada.unidade}-${tagSelecionada.tag}-${dataGeracao}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_")
       : `PMOC-${dataGeracao}`;
 
-    doc.save(`${nomeArquivo}.pdf`);
+    const blob = doc.output("blob");
+    const formData = new FormData();
+    formData.append("pdf", blob, `${nomeArquivo}.pdf`);
+    formData.append("nome", nomeArquivo);
+    formData.append("tag", tagSelecionada?.tag || "");
+    formData.append("unidade", tagSelecionada?.unidade || "");
+    formData.append("data", dataGeracao);
+
+    await axios.post("/api/pmoc/enviar-pdf-email", formData);
+
   };
 
   const handleGerarPdf = async (pmocId: number) => {
