@@ -103,48 +103,75 @@ export default function ListaPDFsPMOC() {
     });
 
     let y = 15;
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.text("PLANO DE MANUTENÇÃO, OPERAÇÃO E CONTROLE - PMOC", 105, y, { align: "center" });
 
-    y += 8;
-    doc.setFontSize(9);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Data de Geração: ${dataGeracao}`, 200, y, { align: "right" });
-
     y += 10;
-    doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    doc.text("1 - Identificação do Ambiente ou Conjunto de Ambientes:", 10, y);
-
-    doc.setFont("helvetica", "normal");
-    y += 7;
-    doc.text(`Nome (Edifício/Entidade): ${pmoc.nomeProprietario || "Sicoob Cressem"}`, 10, y);
-    y += 6;
-    doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
-    y += 6;
-    doc.text(`Endereço completo: ${pmoc.endereco}, Nº: ${pmoc.numero}`, 10, y);
-    y += 6;
-    doc.text(`CEP: ${ambienteSelecionado?.cep || ""}`, 10, y);
-    y += 6;
-    doc.text(`CNPJ: ${ambienteSelecionado?.cnpj || ""}`, 10, y);
-    y += 6;
-    doc.text(`Complemento: ${pmoc.bairro} / ${pmoc.cidade} / ${pmoc.uf}`, 10, y);
-    y += 6;
-    doc.text(`Contrato: AMG 300525`, 10, y);
-
-    y += 10;
     doc.setFont("helvetica", "bold");
-    doc.text("3 - Identificação do Responsável Técnico:", 10, y);
-    doc.setFont("helvetica", "normal");
+    doc.text("1 - IDENTIFICAÇÃO DO AMBIENTE OU CONJUNTO DE AMBIENTES:", 10, y);
+
     y += 7;
-    doc.text(`Nome/Razão Social: ${pmoc.nomeResponsavel || ""}`, 10, y);
-    y += 6;
-    doc.text(`CREASP: ${pmoc.cgcResponsavel || ""}`, 10, y);
-    y += 6;
-    doc.text(`Registro no Conselho: ${pmoc.conselho || ""}`, 10, y);
-    y += 6;
-    doc.text(`ART: ${pmoc.art || ""}`, 10, y);
+    doc.setFont("helvetica", "normal");
+
+    const linhaNome = `NOME: SICOOB CRESSEM`;
+    doc.text(linhaNome, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8;
+
+    const linhaTag = `TAG: ${tagSelecionada ? `${tagSelecionada.tag.toUpperCase()} - ${tagSelecionada.unidade.toUpperCase()} - ${tagSelecionada.local.toUpperCase()}` : ""}`;
+    doc.text(linhaTag, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8;
+
+
+    /*const endereco = `ENDEREÇO: ${formData.endereco?.toUpperCase() || ""}, Nº: ${formData.numero || ""}`;
+    const complemento = `COMPLEMENTO: ${formData.bairro?.toUpperCase() || ""} / ${formData.cidade?.toUpperCase() || ""} / ${formData.uf?.toUpperCase() || ""}`;
+    const cep = `CEP: ${ambienteSelecionado?.cep || ""}`;
+    doc.text(endereco, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
+    y += 8;
+    doc.text(`${complemento} - ${cep}`, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
+    y += 8;*/
+
+    const enderecoCompleto = `ENDEREÇO: ${pmoc.endereco?.toUpperCase() || ""}, Nº: ${pmoc.numero || ""} / ${pmoc.cidade?.toUpperCase() || ""} / ${pmoc.uf?.toUpperCase() || ""} - CEP: ${ambienteSelecionado?.cep || ""}`;
+    doc.text(enderecoCompleto, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8;
+
+    const cnpj = `CNPJ: ${ambienteSelecionado?.cnpj || ""}`;
+    doc.text(cnpj, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8;
+
+    const contrato = `CONTRATO: AMG 300525`;
+    doc.text(contrato, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 10;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("3 - IDENTIFICAÇÃO DO RESPONSÁVEL TÉCNICO:", 10, y);
+    y += 7;
+    doc.setFont("helvetica", "normal");
+
+    const nomeResp = `NOME: ${pmoc.nomeResponsavel?.toUpperCase() || ""}`;
+    doc.text(nomeResp, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const creasp = `CREASP: ${pmoc.cgcResponsavel?.toUpperCase() || ""}`;
+    doc.text(creasp, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const conselho = `REGISTRO NO CONSELHO: ${pmoc.conselho?.toUpperCase() || ""}`;
+    doc.text(conselho, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const art = `ART: ${pmoc.art?.toUpperCase() || ""}`;
+    doc.text(art, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 10;
 
     y += 10;
     doc.setFont("helvetica", "bold");
@@ -305,7 +332,7 @@ export default function ListaPDFsPMOC() {
                       </button>
                       <button
                         onClick={() => handleEnviarEmail(pmoc.id)}
-                        className="bg-green-800 hover:bg-green-600 cursor-pointer text-white px-3 py-1 rounded flex items-center gap-1"
+                        className="hover:bg-green-600 cursor-pointer text-white px-3 py-1 rounded flex items-center gap-1"
                       >
                         <MailPlus size={16} /> Enviar Email
                       </button>

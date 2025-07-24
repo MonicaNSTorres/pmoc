@@ -50,7 +50,7 @@ export async function POST(req: Request) {
             nomeProprietario: "",
             cgcProprietario: "",
             enderecoProprietario: "",
-            nomeResponsavel: "LUIZ CARLOS PELLEGRINI JUNIOR",
+            nomeResponsavel: "LUIZ PELLEGRINI",
             cgcResponsavel: "0682189924",
             conselho: "Engenheiro Industrial - Mecânica - RNP 2602139106",
             art: "2620250917094",

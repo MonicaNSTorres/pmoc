@@ -66,13 +66,13 @@ export default function ModalNovoUsuario({ onClose }: Props) {
         <div className="flex justify-end gap-2 pt-2">
           <button
             onClick={onClose}
-            className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded"
+            className="bg-gray-300 hover:bg-gray-400 cursor-pointer text-black px-4 py-2 rounded"
           >
             Cancelar
           </button>
           <button
             onClick={handleCadastro}
-            className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-blue-800 hover:bg-blue-600 cursor-pointer text-white px-4 py-2 rounded"
             disabled={loading}
           >
             {loading ? "Salvando..." : "Cadastrar"}

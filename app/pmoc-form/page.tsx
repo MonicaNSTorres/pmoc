@@ -61,7 +61,7 @@ export default function PMOCForm() {
     nomeProprietario: "Sicoob Cressem",
     //cgcProprietario: "",
     //enderecoProprietario: "",
-    nomeResponsavel: "LUIZ CARLOS PELLEGRINI JUNIOR",
+    nomeResponsavel: "LUIZ PELLEGRINI",
     cgcResponsavel: "0682189924",
     conselho: "Engenheiro Industrial - Mecânica - RNP 2602139106",
     art: "2620250917094",
@@ -349,6 +349,7 @@ export default function PMOCForm() {
                       >
                         <option value="Mensal">Mensal</option>
                         <option value="Trimestral">Trimestral</option>
+                        <option value="Semestral">Semestral</option>
                       </select>
                     </td>
 

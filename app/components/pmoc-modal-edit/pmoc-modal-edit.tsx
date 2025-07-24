@@ -216,100 +216,106 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     doc.setFontSize(12);
     doc.text("PLANO DE MANUTENÇÃO, OPERAÇÃO E CONTROLE - PMOC", 105, y, { align: "center" });
 
+    y += 10;
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text("1 - IDENTIFICAÇÃO DO AMBIENTE OU CONJUNTO DE AMBIENTES:", 10, y);
+
+    y += 7;
+    doc.setFont("helvetica", "normal");
+
+    const linhaNome = `NOME: ${formData.nomeProprietario?.toUpperCase() || ""}`;
+    doc.text(linhaNome, 10, y);
+    doc.rect(9, y - 5, 190, 7);
     y += 8;
-    doc.setFontSize(9);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Data de Geração: ${dataGeracao}`, 200, y, { align: "right" });
 
+    const linhaTag = `TAG: ${tagSelecionada ? `${tagSelecionada.tag.toUpperCase()} - ${tagSelecionada.unidade.toUpperCase()} - ${tagSelecionada.local.toUpperCase()}` : ""}`;
+    doc.text(linhaTag, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8;
+
+
+    /*const endereco = `ENDEREÇO: ${formData.endereco?.toUpperCase() || ""}, Nº: ${formData.numero || ""}`;
+    const complemento = `COMPLEMENTO: ${formData.bairro?.toUpperCase() || ""} / ${formData.cidade?.toUpperCase() || ""} / ${formData.uf?.toUpperCase() || ""}`;
+    const cep = `CEP: ${ambienteSelecionado?.cep || ""}`;
+    doc.text(endereco, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
+    y += 8;
+    doc.text(`${complemento} - ${cep}`, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
+    y += 8;*/
+
+    const enderecoCompleto = `ENDEREÇO: ${formData.endereco?.toUpperCase() || ""}, Nº: ${formData.numero || ""} / ${formData.cidade?.toUpperCase() || ""} / ${formData.uf?.toUpperCase() || ""} - CEP: ${ambienteSelecionado?.cep || ""}`;
+    doc.text(enderecoCompleto, 10, y);
+    doc.rect(9, y - 5, 190, 7);
+    y += 8; // margem maior para separar
+
+    const cnpj = `CNPJ: ${ambienteSelecionado?.cnpj || ""}`;
+    doc.text(cnpj, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
+    y += 8;
+
+    const contrato = `CONTRATO: ${formData.contrato?.toUpperCase() || ""}`;
+    doc.text(contrato, 10, y);
+    doc.rect(9, y - 5, 190, 7); // Borda
     y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.text("1 - Identificação do Ambiente ou Conjunto de Ambientes:", 10, y);
 
-    doc.setFont("helvetica", "normal");
+    doc.setFont("helvetica", "bold");
+    doc.text("3 - IDENTIFICAÇÃO DO RESPONSÁVEL TÉCNICO:", 10, y);
     y += 7;
-    doc.text(`Nome (Edifício/Entidade): ${formData.nomeProprietario || ""}`, 10, y);
-    y += 6;
-    doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
-    y += 6;
-    doc.text(`Endereço completo: ${formData.endereco || ""}, Nº: ${formData.numero || ""}`, 10, y);
-    y += 6;
-    doc.text(`CEP: ${ambienteSelecionado?.cep || ""}`, 10, y);
-    y += 6;
-    doc.text(`CNPJ: ${ambienteSelecionado?.cnpj || ""}`, 10, y);
-    y += 6;
-    doc.text(`Complemento: ${formData.bairro || ""} / ${formData.cidade || ""} / ${formData.uf || ""}`, 10, y);
-    //y += 6;
-    //doc.text(`Telefone: ${formData.telefone || ""}`, 10, y);
-    y += 6;
-    doc.text(`Contrato: ${formData.contrato || ""}`, 10, y);
-
-
-    {/*y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.text("2 - Identificação do Proprietário, Locatário ou Preposto:", 10, y);
     doc.setFont("helvetica", "normal");
-    y += 7;
-    doc.text(`Nome/Razão Social: ${formData.nomeProprietario || ""}`, 10, y);
-    //y += 6;
-    //doc.text(`CIC/CGC: ${formData.cgcProprietario || ""}`, 10, y);
-    y += 6;
-    doc.text(`Endereço completo: ${formData.enderecoProprietario || ""}`, 10, y);*/}
 
-    y += 10;
+    const nomeResp = `NOME: ${formData.nomeResponsavel?.toUpperCase() || ""}`;
+    doc.text(nomeResp, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const creasp = `CREASP: ${formData.cgcResponsavel?.toUpperCase() || ""}`;
+    doc.text(creasp, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const conselho = `REGISTRO NO CONSELHO: ${formData.conselho?.toUpperCase() || ""}`;
+    doc.text(conselho, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 8;
+
+    const art = `ART: ${formData.art?.toUpperCase() || ""}`;
+    doc.text(art, 10, y);
+    doc.rect(9, y - 5, 190, 7); y += 10;
+
     doc.setFont("helvetica", "bold");
-    doc.text("3 - Identificação do Responsável Técnico:", 10, y);
-    doc.setFont("helvetica", "normal");
-    y += 7;
-    doc.text(`Nome/Razão Social: ${formData.nomeResponsavel || ""}`, 10, y);
-    y += 6;
-    doc.text(`CREASP: ${formData.cgcResponsavel || ""}`, 10, y);
-    y += 6;
-    doc.text(`Registro no Conselho: ${formData.conselho || ""}`, 10, y);
-    y += 6;
-    doc.text(`ART: ${formData.art || ""}`, 10, y);
+    doc.text("5 - PLANO DE MANUTENÇÃO E CONTROLE", 10, y);
 
-    /*y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.text("4 - Relação dos Ambientes Climatizados:", 10, y);
-    doc.setFont("helvetica", "normal");
-    y += 7;
-    doc.text(`Ambiente: ${ambienteSelecionado?.nome || ""}`, 10, y);
-    y += 6;
-    doc.text(`TAG: ${tagSelecionada ? `${tagSelecionada.tag} - ${tagSelecionada.unidade} - ${tagSelecionada.local}` : ""}`, 10, y);
-    y += 6;
-    doc.setFontSize(8);
-    doc.text("NOTA: anexar Projeto de Instalação do sistema de climatização", 10, y);*/
-
-    y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.text("5 - Plano de Manutenção e Controle", 10, y);
-
-    // Tabela
     autoTable(doc, {
       startY: y + 2,
-      head: [["Descrição", "Periodicidade", "Data Execução", "Executado por", "Aprovado por"]],
+      head: [["DESCRIÇÃO", "PERIODICIDADE", "DATA EXECUÇÃO", "EXECUTADO POR"]],
       body: checklist.map((item: ChecklistItem) => [
-        item.descricao,
-        item.periodicidade,
-        formatarDataBR(item.data),
-        item.executadoPor,
-        //item.aprovadoPor,
-      ]),
+      item.descricao?.toLowerCase() || "",
+      item.periodicidade?.toUpperCase() || "",
+      formatarDataBR(item.data),
+      item.executadoPor?.toUpperCase() || "",
+    ]),
+
       styles: {
         fontSize: 7,
         cellPadding: { top: 3, bottom: 3, right: 3, left: 3 },
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
       },
-      headStyles: { fillColor: [230, 230, 230], textColor: 0, fontSize: 8 },
+      headStyles: {
+        fillColor: [230, 230, 230],
+        textColor: 0,
+        fontSize: 8,
+        halign: "center",
+      },
     });
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
     doc.setFont("helvetica", "normal");
-    //doc.line(20, finalY, 90, finalY);
     doc.line(120, finalY, 190, finalY);
-    //doc.text("Técnico Responsável", 30, finalY + 6);
-    doc.text("Engenheiro Responsável", 130, finalY + 6);
+    doc.text("ENGENHEIRO RESPONSÁVEL", 130, finalY + 6);
+
+    // Rodapé com data
+    doc.setFontSize(8);
+    doc.text(`DATA DE GERAÇÃO: ${dataGeracao}`, 105, 290, { align: "center" });
 
     const nomeArquivo = tagSelecionada
       ? `${tagSelecionada.unidade}-${tagSelecionada.tag}-${dataGeracao}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_")
@@ -326,7 +332,6 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     formDataToSend.append("ambienteId", formData.ambienteSelecionado);
 
     await axios.post("/api/salvar-pdf", formDataToSend);
-
   }
 
 
@@ -483,9 +488,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
             )}
 
             <div className="flex justify-end gap-2 pt-4">
-              <button type="button" onClick={onCancel} className="border px-4 py-2 rounded hover:cursor-pointer">Cancelar</button>
-              <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded hover:cursor-pointer">Salvar</button>
-              <button type="button" onClick={handleGeneratePDF} className="bg-green-700 text-white px-4 py-2 rounded hover:cursor-pointer">Gerar PDF</button>
+              <button type="button" onClick={onCancel} className="border px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 cursor-pointe">Cancelar</button>
+              <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer">Salvar</button>
+              <button type="button" onClick={handleGeneratePDF} className="bg-green-700 hover:bg-green-600 cursor-pointer text-white px-4 py-2 rounded hover:cursor-pointer">Gerar PDF</button>
             </div>
           </form>
         </div >

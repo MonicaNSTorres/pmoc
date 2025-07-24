@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen, FaPlusCircle } from "react-icons/fa";
+import { FaClipboardList, FaCogs, FaTags, FaMapMarkedAlt, FaClipboardCheck, FaBars, FaFolderOpen, FaPlusCircle, FaRunning } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 import ModalNovoUsuario from "../pmoc-modal-new-user/pmoc-modal-new-user";
 
@@ -117,9 +117,10 @@ const SidebarPMOC = () => {
               localStorage.removeItem("pmoc_auth");
               window.location.href = "/";
             }}
-            className="flex text-sm text-center items-center text-red-800 mt-4 font-semibold hover:text-red-600 hover:cursor-pointer"
+            className="flex items-center justify-center w-full bg-red-700 text-white px-3 py-2 rounded hover:bg-red-600 cursor-pointer"
           >
-            Sair
+            <FaRunning className={`text-2xl transition-all ${isOpen ? "mr-1" : "mx-auto"}`} />
+            {isOpen && <span>Sair</span>}
           </button>
         </li>
 
@@ -132,8 +133,8 @@ const SidebarPMOC = () => {
               }}
               className="flex items-center justify-center w-full bg-green-700 text-white px-3 py-2 rounded hover:bg-green-600 cursor-pointer"
             >
-              <FaPlusCircle className="text-2xl" />
-              {isOpen && <span> Cadastrar usuário</span>}
+              <FaPlusCircle className={`text-2xl transition-all ${isOpen ? "mr-1" : "mx-auto"}`} />
+              {isOpen && <span>Cadastrar usuário</span>}
             </button>
 
             {mostrarModal && (
