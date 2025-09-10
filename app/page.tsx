@@ -32,9 +32,11 @@ export default function Home() {
       }
 
       localStorage.setItem("pmoc_auth", JSON.stringify(data));
-      (data.admin);
 
-      router.push("/pmoc-form");
+      //(data.admin);
+
+      //router.push("/pmoc-form");
+      window.location.href = "/pmoc-form";
     } catch (err) {
       alert("Erro ao fazer login.");
       console.error(err);
