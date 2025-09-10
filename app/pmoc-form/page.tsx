@@ -80,7 +80,8 @@ export default function PMOCForm() {
         ]);
 
         setAmbientes(resAmbientes.data);
-        setTags(resTags.data);
+        //setTags(resTags.data);
+        setServicos(resTags.data);
       } catch (err) {
         console.error("Erro ao carregar dados iniciais:", err);
       }
