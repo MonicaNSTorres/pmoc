@@ -467,7 +467,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                           >
                             <option value="">Selecione</option>
                             <option value="Mensal">Mensal</option>
+                            <option value="Bimensal">Bimensal</option>
                             <option value="Trimestral">Trimestral</option>
+                            <option value="Semestral">Semestral</option>
                           </select>
                         </td>
 

@@ -348,6 +348,7 @@ export default function PMOCForm() {
                         onChange={(e) => handleChecklistChange(i, "periodicidade", e.target.value)}
                       >
                         <option value="Mensal">Mensal</option>
+                        <option value="Bimensal">Bimensal</option>
                         <option value="Trimestral">Trimestral</option>
                         <option value="Semestral">Semestral</option>
                       </select>
