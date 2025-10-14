@@ -321,7 +321,7 @@ export default function PMOCForm() {
                   <th className="border p-2 w-2/5">Descrição</th>
                   <th className="border p-2 w-1/5">Periodicidade</th>
                   <th className="border p-2 w-1/5">Data Execução</th>
-                  <th className="border p-2 w-1/5">Executado por</th>
+                  {/*<th className="border p-2 w-1/5">Executado por</th>*/}
                   {/*<th className="border p-2 w-1/5">Aprovado por</th>*/}
                 </tr>
               </thead>
@@ -364,14 +364,14 @@ export default function PMOCForm() {
                         onChange={(e) => handleChecklistChange(i, "data", e.target.value)}
                       />
                     </td>
-                    <td className="border p-1">
+                    {/*<td className="border p-1">
                       <input
                         type="text"
                         className="w-full border rounded px-1 py-1 focus:ring-2 focus:ring-blue-400 text-xs"
                         value={item.executadoPor}
                         onChange={(e) => handleChecklistChange(i, "executadoPor", e.target.value)}
                       />
-                    </td>
+                    </td>*/}
                     {/*<td className="border p-1">
                       <input
                         type="text"

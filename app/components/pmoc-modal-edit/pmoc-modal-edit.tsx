@@ -294,12 +294,12 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
     autoTable(doc, {
       startY: y + 2,
-      head: [["DESCRIÇÃO", "PERIODICIDADE", "DATA EXECUÇÃO", "EXECUTADO POR"]],
+      head: [["DESCRIÇÃO", "PERIODICIDADE", "DATA EXECUÇÃO", /*"EXECUTADO POR"*/]],
       body: checklist.map((item: ChecklistItem) => [
         item.descricao?.toLowerCase() || "",
         item.periodicidade?.toUpperCase() || "",
         formatarDataBR(item.data),
-        item.executadoPor?.toUpperCase() || "",
+        //item.executadoPor?.toUpperCase() || "",
       ]),
 
       styles: {
@@ -468,7 +468,7 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                       <th className="border p-2">Descrição</th>
                       <th className="border p-2">Periodicidade</th>
                       <th className="border p-2">Data Execução</th>
-                      <th className="border p-2">Executado por</th>
+                      {/*<th className="border p-2">Executado por</th>*/}
                       {/*<th className="border p-2">Aprovado por</th>*/}
                     </tr>
                   </thead>
@@ -493,9 +493,9 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
                         <td className="border p-2">
                           <input type="date" className="w-full border rounded px-2" value={item.data} onChange={(e) => handleChecklistChange(index, "data", e.target.value)} />
                         </td>
-                        <td className="border p-2">
+                        {/*<td className="border p-2">
                           <input type="text" className="w-full border rounded px-2" value={item.executadoPor} onChange={(e) => handleChecklistChange(index, "executadoPor", e.target.value)} />
-                        </td>
+                        </td>*/}
                         {/*<td className="border p-2">
                           <input type="text" className="w-full border rounded px-2" value={item.aprovadoPor} onChange={(e) => handleChecklistChange(index, "aprovadoPor", e.target.value)} />
                         </td>*/}

@@ -57,8 +57,8 @@ export default function DetalharPMOC() {
               <th className="border p-2">Descrição</th>
               <th className="border p-2">Periodicidade</th>
               <th className="border p-2">Data Execução</th>
-              <th className="border p-2">Executado por</th>
-              <th className="border p-2">Aprovado por</th>
+              {/*<th className="border p-2">Executado por</th>
+              <th className="border p-2">Aprovado por</th>*/}
             </tr>
           </thead>
           <tbody>
@@ -67,8 +67,8 @@ export default function DetalharPMOC() {
                 <td className="border p-2">{item.descricao}</td>
                 <td className="border p-2">{item.periodicidade}</td>
                 <td className="border p-2">{item.dataExecucao ? new Date(item.dataExecucao).toLocaleDateString() : '-'}</td>
-                <td className="border p-2">{item.executadoPor}</td>
-                <td className="border p-2">{item.aprovadoPor}</td>
+                {/*<td className="border p-2">{item.executadoPor}</td>
+                <td className="border p-2">{item.aprovadoPor}</td>*/}
               </tr>
             ))}
           </tbody>
