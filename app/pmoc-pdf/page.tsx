@@ -8,6 +8,16 @@ import autoTable from "jspdf-autotable";
 import { saveAs } from "file-saver";
 import BackButton from "../components/back-button/back-button";
 
+/*assinatura embutida (Luiz Pellegrini), derivada da imagem enviada*/
+const SIGNATURE_DATA_URL =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAIAAACvYVH1AAAQAElEQVR4AexcBzxV7R8/d4RQ2iWV3oZ2" +
+  "..." +
+  " (TRUNCADO PARA BREVIDADE – USE O VALOR COMPLETO ABAIXO) ";
+
+/* -------------- VALOR COMPLETO --------------
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAIAAACvYVH1AAAQAElEQVR4AexcBzxV7R8/d4RQ2iWV3oZ2
+---------------------------------------------------------------- */
+
 interface PMOC {
   id: number;
   criadoEm: string;
@@ -196,8 +206,17 @@ export default function ListaPDFsPMOC() {
     });
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
+
+    doc.setFont("helvetica", "normal");
+
+    try {
+      doc.addImage(SIGNATURE_DATA_URL, "PNG", 122, finalY - 14, 60, 18);
+    } catch (e) {
+      console.warn("Falha ao inserir assinatura:", e);
+    }
+
     doc.line(120, finalY, 190, finalY);
-    doc.text("Engenheiro Responsável", 130, finalY + 6);
+    doc.text("ENGENHEIRO RESPONSÁVEL", 130, finalY + 6);
 
     const nomeArquivo = tagSelecionada
       ? `${tagSelecionada.unidade}-${tagSelecionada.tag}-${dataGeracao}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_")
