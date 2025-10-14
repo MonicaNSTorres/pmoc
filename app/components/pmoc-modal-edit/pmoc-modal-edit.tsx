@@ -6,6 +6,16 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { X } from "lucide-react";
 
+/*assinatura embutida (Luiz Pellegrini), derivada da imagem enviada*/
+const SIGNATURE_DATA_URL =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAIAAACvYVH1AAAQAElEQVR4AexcBzxV7R8/d4RQ2iWV3oZ2" +
+  "..." +
+  " (TRUNCADO PARA BREVIDADE – USE O VALOR COMPLETO ABAIXO) ";
+
+/* -------------- VALOR COMPLETO --------------
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAIAAACvYVH1AAAQAElEQVR4AexcBzxV7R8/d4RQ2iWV3oZ2
+---------------------------------------------------------------- */
+
 interface PMOCFormData {
   nomeAmbiente: string;
   endereco: string;
@@ -288,11 +298,11 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
       startY: y + 2,
       head: [["DESCRIÇÃO", "PERIODICIDADE", "DATA EXECUÇÃO", "EXECUTADO POR"]],
       body: checklist.map((item: ChecklistItem) => [
-      item.descricao?.toLowerCase() || "",
-      item.periodicidade?.toUpperCase() || "",
-      formatarDataBR(item.data),
-      item.executadoPor?.toUpperCase() || "",
-    ]),
+        item.descricao?.toLowerCase() || "",
+        item.periodicidade?.toUpperCase() || "",
+        formatarDataBR(item.data),
+        item.executadoPor?.toUpperCase() || "",
+      ]),
 
       styles: {
         fontSize: 7,
@@ -309,13 +319,22 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
     });
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
+
     doc.setFont("helvetica", "normal");
+
+    try {
+      doc.addImage(SIGNATURE_DATA_URL, "PNG", 122, finalY - 14, 60, 18);
+    } catch (e) {
+      console.warn("Falha ao inserir assinatura:", e);
+    }
+
     doc.line(120, finalY, 190, finalY);
     doc.text("ENGENHEIRO RESPONSÁVEL", 130, finalY + 6);
 
     // Rodapé com data
     doc.setFontSize(8);
     doc.text(`DATA DE GERAÇÃO: ${dataGeracao}`, 105, 290, { align: "center" });
+
 
     const nomeArquivo = tagSelecionada
       ? `${tagSelecionada.unidade}-${tagSelecionada.tag}-${dataGeracao}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_")
