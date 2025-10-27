@@ -41,6 +41,7 @@ export default function ListaPMOC() {
   //const [unidadeSelecionada, setUnidadeSelecionada] = useState("");
   const [ambienteSelecionado, setAmbienteSelecionado] = useState("");
   const [unidades, setUnidades] = useState<{ nome: string }[]>([]);
+  const [periodicidade, setPeriodicidade] = useState("Mensal");
 
 
   useEffect(() => {
@@ -100,6 +101,12 @@ export default function ListaPMOC() {
       console.error("Erro ao gerar PMOCs:", error);
       alert("Erro ao gerar PMOCs: " + (error?.response?.data?.error || "Erro desconhecido"));
     }
+
+    await axios.post("/api/pmoc/gerar-multiplo", {
+      unidade: ambienteSelecionado,
+      periodicidade,
+    });
+
   }
 
 
@@ -139,7 +146,6 @@ export default function ListaPMOC() {
             </button>
           </div>
 
-          {/* Linha de geração de PMOCs */}
           <div className="flex flex-wrap items-end gap-4">
             <div>
               <label className="block text-sm text-gray-700 mb-1 font-semibold">
@@ -155,9 +161,24 @@ export default function ListaPMOC() {
                   <option key={u.nome} value={u.nome}>{u.nome}</option>
                 ))}
               </select>
-
-
             </div>
+
+            <div>
+              <label className="block text-sm text-gray-700 mb-1 font-semibold">
+                Periodicidade
+              </label>
+              <select
+                value={periodicidade}
+                onChange={(e) => setPeriodicidade(e.target.value)}
+                className="border px-3 py-2 text-sm rounded"
+              >
+                <option value="Todos">Todos</option>
+                <option value="Mensal">Mensal</option>
+                <option value="Trimestral">Trimestral</option>
+                <option value="Semestral">Semestral</option>
+              </select>
+            </div>
+
             <div className="pt-6">
               <button
                 onClick={handleGerarPMOCs}
