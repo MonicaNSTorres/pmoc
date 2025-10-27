@@ -90,12 +90,18 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
 
   useEffect(() => {
     if (servicos.length > 0 && initialData?.checklist) {
+      const fallbackIso = initialData?.criadoEm
+        ? String(initialData.criadoEm).split("T")[0]
+        : "";
+
       const checklistFormatado = initialData.checklist.map((item: any): ChecklistItem => {
         const servico = servicos.find(s => String(s.id) === String(item.descricao));
         return {
           descricao: servico ? servico.nome : item.descricao,
           periodicidade: item.periodicidade,
-          data: item.dataExecucao ? item.dataExecucao.split("T")[0] : "",
+          data: item.dataExecucao
+            ? String(item.dataExecucao).split("T")[0]
+            : fallbackIso,
           executadoPor: item.executadoPor,
           //aprovadoPor: item.aprovadoPor,
         };
@@ -298,7 +304,8 @@ export default function PMOCFormEditable({ initialData, onCancel, onSave }: Prop
       body: checklist.map((item: ChecklistItem) => [
         item.descricao?.toLowerCase() || "",
         item.periodicidade?.toUpperCase() || "",
-        formatarDataBR(item.data),
+        formatarDataBR(item.data || (initialData?.criadoEm ? String(initialData.criadoEm).split("T")[0] : "")),
+        //formatarDataBR(item.data),
         //item.executadoPor?.toUpperCase() || "",
       ]),
 

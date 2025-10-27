@@ -93,6 +93,8 @@ export async function POST(req: Request) {
             },
           });
 
+          const dataExecucaoPadrao = novoPMOC.criadoEm;
+
           //criar checklists com serviços daquela periodicidade
           await prisma.checklist.createMany({
             data: servicos.map((srv) => ({
@@ -100,6 +102,7 @@ export async function POST(req: Request) {
               descricao: srv.nome,
               periodicidade: p,
               servicoId: srv.id,
+              dataExecucao: dataExecucaoPadrao,
             })),
           });
 

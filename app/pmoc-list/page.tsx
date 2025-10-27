@@ -91,8 +91,12 @@ export default function ListaPMOC() {
     if (!ambienteSelecionado) return;
 
     try {
+      /*await axios.post("/api/pmoc/gerar-multiplo", {
+        unidade: ambienteSelecionado,
+      });*/
       await axios.post("/api/pmoc/gerar-multiplo", {
         unidade: ambienteSelecionado,
+        periodicidade,
       });
 
       alert("PMOCs gerados com sucesso!");
@@ -101,11 +105,6 @@ export default function ListaPMOC() {
       console.error("Erro ao gerar PMOCs:", error);
       alert("Erro ao gerar PMOCs: " + (error?.response?.data?.error || "Erro desconhecido"));
     }
-
-    await axios.post("/api/pmoc/gerar-multiplo", {
-      unidade: ambienteSelecionado,
-      periodicidade,
-    });
 
   }
 
