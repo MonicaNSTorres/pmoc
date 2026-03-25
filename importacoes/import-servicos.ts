@@ -1,4 +1,3 @@
-/*
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -31,4 +30,3 @@ main()
     prisma.$disconnect();
     process.exit(1);
   });
-*/

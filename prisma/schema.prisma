@@ -8,53 +8,49 @@ datasource db {
 }
 
 model Ambiente {
-  id        Int     @id @default(autoincrement())
-  nome      String  @unique
-  endereco  String?
-  numero    String?
-  bairro    String?
-  cidade    String?
-  uf        String?
-  telefone  String?
-  cnpj      String?
-  cep       String?
-
-  tags   Tag[]   @relation("AmbienteTags")
-  pmocs  PMOC[]  @relation("AmbientePMOC")
+  id       Int     @id @default(autoincrement())
+  nome     String  @unique
+  cnpj     String?
+  bairro   String?
+  cidade   String?
+  endereco String?
+  numero   String?
+  telefone String?
+  uf       String?
+  cep      String?
+  pmocs    PMOC[]  @relation("AmbientePMOC")
+  tags     Tag[]   @relation("AmbienteTags")
 }
 
 model Tag {
-  id        Int           @id @default(autoincrement())
-  nome      String
-  unidade   String
-  local     String
-  tag       String
-
+  id           Int           @id @default(autoincrement())
+  tag          String
+  unidade      String
+  local        String
   ambienteId   Int?
-  ambiente     Ambiente?     @relation("AmbienteTags", fields: [ambienteId], references: [id])
+  nome         String
   equipamentos Equipamento[] @relation("TagEquipamentos")
   pmocs        PMOC[]        @relation("TagPMOC")
+  ambiente     Ambiente?     @relation("AmbienteTags", fields: [ambienteId], references: [id])
 }
 
-
 model Equipamento {
-  id           Int    @id @default(autoincrement())
-  modelo       String
-  numeroSerie  String
-  tagId        Int
-  tag          Tag    @relation("TagEquipamentos", fields: [tagId], references: [id])
+  id          Int    @id @default(autoincrement())
+  modelo      String
+  numeroSerie String
+  tagId       Int
+  tag         Tag    @relation("TagEquipamentos", fields: [tagId], references: [id])
 }
 
 model Servico {
-  id        Int      @id @default(autoincrement())
-  nome      String   @unique
-
-  pmocs      PMOC[]      @relation("ServicoPMOC")
+  id         Int         @id @default(autoincrement())
+  nome       String      @unique
   checklists Checklist[]
+  pmocs      PMOC[]      @relation("ServicoPMOC")
 }
 
 model PMOC {
-  id                   Int    @id @default(autoincrement())
+  id                   Int         @id @default(autoincrement())
   nomeAmbiente         String
   endereco             String
   numero               String
@@ -69,18 +65,15 @@ model PMOC {
   cgcResponsavel       String
   conselho             String
   art                  String
+  ambienteId           Int?
+  servicoId            Int?
+  tagId                Int?
+  criadoEm             DateTime    @default(now())
   contrato             String?
-
-  ambienteId Int?
-  servicoId  Int?
-  tagId      Int?
-
-  ambiente Ambiente? @relation("AmbientePMOC", fields: [ambienteId], references: [id])
-  servico  Servico?  @relation("ServicoPMOC", fields: [servicoId], references: [id])
-  tag      Tag?      @relation("TagPMOC", fields: [tagId], references: [id])
-
-  checklist Checklist[]
-  criadoEm  DateTime @default(now())
+  checklist            Checklist[]
+  ambiente             Ambiente?   @relation("AmbientePMOC", fields: [ambienteId], references: [id])
+  servico              Servico?    @relation("ServicoPMOC", fields: [servicoId], references: [id])
+  tag                  Tag?        @relation("TagPMOC", fields: [tagId], references: [id])
 }
 
 model Checklist {
@@ -90,19 +83,17 @@ model Checklist {
   dataExecucao  DateTime?
   executadoPor  String?
   aprovadoPor   String?
-
-  pmocId    Int
-  servicoId Int?
-
-  pmoc    PMOC     @relation(fields: [pmocId], references: [id])
-  servico Servico? @relation(fields: [servicoId], references: [id])
+  pmocId        Int
+  servicoId     Int?
+  pmoc          PMOC      @relation(fields: [pmocId], references: [id])
+  servico       Servico?  @relation(fields: [servicoId], references: [id])
 }
 
 model Usuario {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  email     String   @unique
-  senha     String
-  admin     Boolean  @default(false)
-  criadoEm  DateTime @default(now())
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  senha    String
+  admin    Boolean  @default(false)
+  criadoEm DateTime @default(now())
 }

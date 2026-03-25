@@ -83,9 +83,9 @@ async function main() {
     await prisma.ambiente.create({ data: ambiente });
   }
 
-  console.log("✅ Ambientes substituídos com sucesso.");
+  console.log("Ambientes substituídos com sucesso.");
 }
 
 main()
-  .catch((e) => console.error("❌ Erro ao importar ambientes:", e))
+  .catch((e) => console.error("Erro ao importar ambientes:", e))
   .finally(() => prisma.$disconnect());
