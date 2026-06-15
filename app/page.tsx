@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-200">
       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md w-full max-w-sm space-y-4">
-        <h2 className="text-xl font-bold text-center">Login PMOC - AMG</h2>
+        <h2 className="text-xl font-bold text-center">Login</h2>
         <input
           type="email"
           placeholder="E-mail"
